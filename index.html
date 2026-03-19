@@ -1,1495 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clixa Health — Digital Health Innovation</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Digital Health Innovation &mdash; Clixa Health</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
 <style>
-/* ═══════════════════════════════════════════
-   ROOT & RESET
-═══════════════════════════════════════════ */
-:root{
-  --bg:#03091A;--bg2:#060D22;--bg3:#0A1530;--bg4:#0F1E40;
-  --blue:#0EA5E9;--cyan:#06B6D4;--teal:#14B8A6;--sky:#38BDF8;
-  --white:#fff;--off:#EEF4FF;--muted:#8BA3C0;--dim:#4A6380;
-  --border:rgba(14,165,233,.10);--border2:rgba(14,165,233,.22);--border3:rgba(14,165,233,.40);
-  --grad:linear-gradient(135deg,#0EA5E9,#14B8A6);
-  --grad2:linear-gradient(135deg,#06B6D4,#0EA5E9);
-  --fd:'Outfit',sans-serif;--fb:'Plus Jakarta Sans',sans-serif;
-  --ease:cubic-bezier(.16,1,.3,1);
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--white);font-family:var(--fb);overflow-x:hidden;font-size:16px;line-height:1.6}
-img{max-width:100%}
-a{text-decoration:none;color:inherit}
-button,input,select,textarea{font-family:var(--fb)}
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-thumb{background:rgba(14,165,233,.3);border-radius:2px}
-
-/* PAGE VISIBILITY */
-.page{display:none}
-.page.active{display:block}
-#page-home{display:block}
-
-/* ═══════════════════════════════════════════
-   TYPOGRAPHY HELPERS
-═══════════════════════════════════════════ */
-.display{font-family:var(--fd);font-weight:800;letter-spacing:-1.5px;line-height:1.06}
-.grad-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.label{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan);display:inline-flex;align-items:center;gap:8px}
-.label::before{content:'';width:16px;height:1.5px;background:var(--cyan)}
-
-/* ═══════════════════════════════════════════
-   BUTTONS
-═══════════════════════════════════════════ */
-.btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:12px 26px;border-radius:10px;border:none;cursor:pointer;transition:.3s var(--ease);text-decoration:none;letter-spacing:-.1px}
-.btn-grad{background:var(--grad);color:#fff;box-shadow:0 0 28px rgba(14,165,233,.3)}
-.btn-grad:hover{transform:translateY(-2px);box-shadow:0 0 44px rgba(14,165,233,.5)}
-.btn-outline{background:rgba(14,165,233,.06);color:var(--sky);border:1px solid var(--border2)}
-.btn-outline:hover{background:rgba(14,165,233,.12);border-color:var(--border3);transform:translateY(-1px)}
-.btn-white{background:#fff;color:var(--bg);font-weight:700}
-.btn-white:hover{background:var(--off);transform:translateY(-1px)}
-.btn-lg{font-size:15px;padding:14px 32px}
-.btn-sm{font-size:13px;padding:9px 20px}
-
-/* ═══════════════════════════════════════════
-   NAV
-═══════════════════════════════════════════ */
-#nav{position:fixed;top:0;left:0;right:0;z-index:500;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(3,9,26,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:.4s var(--ease)}
-.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
-.logo-mark{width:34px;height:34px;border-radius:9px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(14,165,233,.35);flex-shrink:0}
-.logo-mark svg{width:18px;height:18px}
-.logo-text{display:flex;flex-direction:column;line-height:1}
-.logo-name{font-family:var(--fd);font-weight:800;font-size:19px;letter-spacing:-.4px}
-.logo-sub{font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan);opacity:.8}
-.nav-links{display:flex;align-items:center;gap:2px;list-style:none}
-.nav-links a,.nav-links button{background:none;border:none;color:var(--muted);font-size:13.5px;font-weight:500;padding:6px 12px;border-radius:8px;cursor:pointer;transition:.22s}
-.nav-links a:hover,.nav-links button:hover{color:var(--white);background:rgba(14,165,233,.07)}
-.nav-cta{background:var(--grad)!important;color:#fff!important;font-weight:600!important;border-radius:9px!important;box-shadow:0 0 22px rgba(14,165,233,.28);padding:8px 20px!important}
-.nav-cta:hover{box-shadow:0 0 36px rgba(14,165,233,.48)!important;transform:translateY(-1px)!important}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
-.hamburger span{width:22px;height:1.5px;background:var(--muted);border-radius:2px;transition:.3s}
-.mobile-nav{position:fixed;top:64px;left:0;right:0;background:rgba(3,9,26,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:16px 5vw 20px;z-index:499;transform:translateY(-110%);transition:.4s var(--ease)}
-.mobile-nav.open{transform:translateY(0)}
-.mobile-nav a,.mobile-nav button{display:block;width:100%;text-align:left;padding:12px 0;color:var(--muted);font-size:15px;border-bottom:1px solid var(--border);background:none;border-left:none;border-right:none;border-top:none;cursor:pointer}
-
-/* ═══════════════════════════════════════════
-   SHARED SECTION STYLES
-═══════════════════════════════════════════ */
-.section{padding:88px 5vw;position:relative}
-.section-center{text-align:center}
-.section h2{font-family:var(--fd);font-size:clamp(28px,3.5vw,48px);font-weight:800;letter-spacing:-1.3px;line-height:1.07;margin-bottom:16px}
-.section p.sub{font-size:16px;color:var(--muted);line-height:1.7;max-width:540px;font-weight:300}
-.section-center p.sub{margin:0 auto}
-
-/* CARDS */
-.card{background:var(--bg3);border:1px solid var(--border);border-radius:16px;transition:.35s var(--ease)}
-.card:hover{border-color:var(--border2);box-shadow:0 16px 48px rgba(0,0,0,.4)}
-
-/* GRID */
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
-.reveal.in{opacity:1;transform:none}
-
-/* INPUT/FORM */
-.field{margin-bottom:18px}
-.field label{display:block;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.6px;margin-bottom:7px;text-transform:uppercase}
-.field input,.field select,.field textarea{width:100%;padding:11px 14px;background:rgba(14,165,233,.04);border:1px solid var(--border2);border-radius:9px;color:var(--white);font-family:var(--fb);font-size:14px;outline:none;transition:.3s}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--border3);background:rgba(14,165,233,.07);box-shadow:0 0 0 3px rgba(14,165,233,.08)}
-.field textarea{resize:vertical;min-height:100px}
-.field select option{background:var(--bg3)}
-
-/* ═══════════════════════════════════════════
-   ████  HOME PAGE  ████
-═══════════════════════════════════════════ */
-
-/* ── HERO ── */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 5vw 60px;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;pointer-events:none}
-.hero-glow{position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(ellipse,rgba(14,165,233,.12) 0%,transparent 66%);animation:gPulse 8s ease-in-out infinite}
+.hero-glow{position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(ellipse,rgba(14,165,233,.12) 0%,transparent 66%);animation:gPulse 8s ease-in-out infinite;pointer-events:none}
 @keyframes gPulse{0%,100%{opacity:.7;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.06)}}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(14,165,233,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(14,165,233,.03) 1px,transparent 1px);background-size:52px 52px;mask-image:radial-gradient(ellipse at 50% 50%,black 0%,transparent 70%)}
-
-.hero-tag{display:inline-flex;align-items:center;gap:7px;padding:5px 16px;border:1px solid var(--border2);border-radius:100px;font-size:12px;color:var(--cyan);background:rgba(6,182,212,.05);margin-bottom:28px;font-weight:500}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(14,165,233,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(14,165,233,.03) 1px,transparent 1px);background-size:52px 52px;mask-image:radial-gradient(ellipse at 50% 50%,black 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;padding:5px 16px;border:1px solid var(--border2);border-radius:100px;font-family:var(--fd);font-size:11px;color:var(--cyan);background:rgba(6,182,212,.05);margin-bottom:28px;font-weight:600;letter-spacing:.5px}
 .hero-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);animation:blink 2s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.hero h1{font-family:var(--fd);font-size:clamp(40px,6vw,84px);font-weight:900;letter-spacing:-2.5px;line-height:1.03;max-width:880px;margin-bottom:22px}
+.hero h1{font-family:var(--fd);font-size:clamp(40px,6.5vw,88px);font-weight:800;letter-spacing:-3px;line-height:1.02;max-width:900px;margin-bottom:22px}
 .hero p{font-size:clamp(15px,1.7vw,18px);color:var(--muted);max-width:600px;margin-bottom:40px;line-height:1.7;font-weight:300}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
-.hero-stats{display:flex;gap:48px;justify-content:center;flex-wrap:wrap}
-.hs{text-align:center}
-.hs-val{font-family:var(--fd);font-size:32px;font-weight:900;letter-spacing:-1px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hs-lbl{font-size:12.5px;color:var(--muted);margin-top:3px}
-
-/* ── INVITE SECTION ── */
-.invite-section{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);position:relative;overflow:hidden}
-.invite-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.invite-content .label{margin-bottom:18px}
-.invite-content h2{margin-bottom:18px}
-.invite-content p{color:var(--muted);font-size:15px;line-height:1.75;margin-bottom:28px;font-weight:300}
-.invite-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
-.pill{display:flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--border2);border-radius:100px;font-size:12.5px;color:var(--off);background:rgba(14,165,233,.04);font-weight:500}
-.invite-visual{position:relative}
-.invite-card{background:var(--bg3);border:1px solid var(--border2);border-radius:20px;padding:28px;position:relative;overflow:hidden}
-.invite-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
-.mini-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.mini-stat{background:rgba(14,165,233,.04);border:1px solid var(--border);border-radius:11px;padding:14px;text-align:center}
-.ms-val{font-family:var(--fd);font-size:22px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.ms-lbl{font-size:11px;color:var(--muted);margin-top:3px}
-.invite-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:12px;color:var(--muted)}
-.bar-track{flex:1;height:5px;background:rgba(14,165,233,.08);border-radius:3px;overflow:hidden}
-.bar-fill{height:100%;border-radius:3px;background:var(--grad);transform-origin:left;animation:barIn 1.8s var(--ease) .5s both}
-@keyframes barIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-
-/* ── SERVICES SECTION ── */
-.services-section{max-width:1120px;margin:0 auto}
-.services-section-wrap{padding:88px 5vw}
-.services-header{text-align:center;margin-bottom:52px}
-.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.srv-card{background:var(--bg3);border:1px solid var(--border);border-radius:18px;padding:28px 22px;cursor:pointer;transition:.35s var(--ease);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:72px}
+.hero-stats{display:flex;gap:52px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.hs{text-align:center}.hs-val{font-family:var(--fd);font-size:34px;font-weight:800;letter-spacing:-1.5px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.hs-lbl{font-size:12px;color:var(--muted);margin-top:3px}
+.srv-wrap{padding:88px 5vw;background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%)}.srv-inner{max-width:1120px;margin:0 auto}.srv-header{text-align:center;margin-bottom:52px}
+.srv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.srv-card{background:var(--bg3);border:1px solid var(--border);border-radius:18px;padding:28px 22px;transition:.35s var(--ease);position:relative;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit}
 .srv-card::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(14,165,233,.06) 0%,transparent 60%);opacity:0;transition:.35s}
-.srv-card:hover{border-color:var(--border2);transform:translateY(-5px);box-shadow:0 20px 52px rgba(0,0,0,.45)}
-.srv-card:hover::before{opacity:1}
+.srv-card:hover{border-color:var(--border2);transform:translateY(-5px);box-shadow:0 20px 52px rgba(0,0,0,.45)}.srv-card:hover::before{opacity:1}
 .srv-icon{width:50px;height:50px;border-radius:13px;background:rgba(14,165,233,.09);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px;transition:.35s}
 .srv-card:hover .srv-icon{background:rgba(14,165,233,.16);box-shadow:0 0 18px rgba(14,165,233,.2)}
-.srv-title{font-family:var(--fd);font-size:17px;font-weight:800;margin-bottom:10px;letter-spacing:-.35px}
+.srv-title{font-family:var(--fd);font-size:17px;font-weight:800;margin-bottom:10px;letter-spacing:-.5px}
 .srv-desc{font-size:13px;color:var(--muted);line-height:1.6;flex:1;margin-bottom:20px}
-.srv-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--sky);transition:.22s;background:none;border:none;cursor:pointer;padding:0;font-family:var(--fb)}
+.srv-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--fd);font-size:12.5px;font-weight:700;color:var(--sky);transition:.22s;background:none;border:none;cursor:pointer;padding:0}
 .srv-link:hover{gap:9px}
-
-/* ── TOOLS PREVIEW ── */
-.tools-preview-section{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);padding:88px 5vw}
-.tools-inner{max-width:1120px;margin:0 auto}
-.tools-header{text-align:center;margin-bottom:52px}
-.tools-preview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px}
-.tool-prev-card{background:var(--bg3);border:1px solid var(--border);border-radius:13px;padding:20px 16px;cursor:pointer;transition:.3s var(--ease);position:relative}
-.tool-prev-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.36)}
+.tprev-wrap{padding:88px 5vw}.tprev-inner{max-width:1120px;margin:0 auto}.tprev-header{text-align:center;margin-bottom:52px}
+.tprev-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px}
+.tpc{background:var(--bg3);border:1px solid var(--border);border-radius:13px;padding:20px 16px;transition:.3s var(--ease);text-decoration:none;color:inherit;display:block}
+.tpc:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.36)}
 .tpc-icon{width:40px;height:40px;border-radius:10px;background:rgba(14,165,233,.07);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px}
-.tpc-name{font-family:var(--fd);font-size:14px;font-weight:700;margin-bottom:5px;letter-spacing:-.25px}
+.tpc-name{font-family:var(--fd);font-size:14px;font-weight:700;margin-bottom:5px;letter-spacing:-.3px}
 .tpc-desc{font-size:11.5px;color:var(--muted);line-height:1.5;margin-bottom:12px}
-.tpc-launch{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--cyan);background:none;border:none;cursor:pointer;padding:0;font-family:var(--fb);transition:.2s}
-.tpc-launch:hover{gap:8px;color:var(--sky)}
-
-/* ── WHY DIGITAL HEALTH ── */
-.why-section{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg3) 50%,var(--bg2) 100%);padding:88px 5vw}
-.why-inner{max-width:1120px;margin:0 auto}
-.why-header{text-align:center;margin-bottom:52px}
+.tpc-launch{display:inline-flex;align-items:center;gap:5px;font-family:var(--fd);font-size:11.5px;font-weight:700;color:var(--cyan);background:none;border:none;cursor:pointer;padding:0;transition:.2s}
+.why-wrap{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg3) 50%,var(--bg2) 100%);padding:88px 5vw}
+.why-inner{max-width:1120px;margin:0 auto}.why-header{text-align:center;margin-bottom:52px}
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .why-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:28px;transition:.3s var(--ease)}
 .why-card:hover{border-color:var(--border2);transform:translateY(-3px)}
-.why-icon{font-size:28px;margin-bottom:14px}
-.why-title{font-family:var(--fd);font-size:16px;font-weight:700;margin-bottom:9px;letter-spacing:-.3px}
-.why-text{font-size:13px;color:var(--muted);line-height:1.65}
-
-/* ── IMPACT SECTION ── */
-.impact-section{padding:88px 5vw;background:var(--bg)}
-.impact-inner{max-width:1120px;margin:0 auto}
-.impact-header{text-align:center;margin-bottom:52px}
+.why-icon{font-size:28px;margin-bottom:14px}.why-title{font-family:var(--fd);font-size:16px;font-weight:700;margin-bottom:9px;letter-spacing:-.4px}.why-text{font-size:13px;color:var(--muted);line-height:1.65}
+.impact-wrap{padding:88px 5vw}.impact-inner{max-width:1120px;margin:0 auto}.impact-header{text-align:center;margin-bottom:52px}
 .impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:40px}
-.impact-stat{padding:32px 24px;text-align:center;border-right:1px solid var(--border);background:var(--bg3)}
-.impact-stat:last-child{border-right:none}
-.is-val{font-family:var(--fd);font-size:36px;font-weight:900;letter-spacing:-1px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:7px}
-.is-lbl{font-size:13px;color:var(--muted)}
+.impact-stat{padding:32px 24px;text-align:center;border-right:1px solid var(--border);background:var(--bg3)}.impact-stat:last-child{border-right:none}
+.is-val{font-family:var(--fd);font-size:38px;font-weight:800;letter-spacing:-1.5px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:8px}.is-lbl{font-size:13px;color:var(--muted)}
 .impact-bars{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.impact-bar-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:22px}
-.ibc-title{font-size:13px;font-weight:600;margin-bottom:14px;color:var(--off)}
-.ibc-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:12px;color:var(--muted)}
-.ibc-row:last-child{margin-bottom:0}
-.ibc-track{flex:1;height:5px;background:rgba(14,165,233,.08);border-radius:3px;overflow:hidden}
-.ibc-fill{height:100%;border-radius:3px;background:var(--grad)}
-
-/* ── TESTIMONIALS ── */
-.testi-section{padding:88px 5vw;background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%)}
-.testi-inner{max-width:1120px;margin:0 auto}
-.testi-header{text-align:center;margin-bottom:48px}
+.ibar-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:22px}
+.ibar-title{font-family:var(--fd);font-size:13px;font-weight:700;margin-bottom:14px;color:var(--off);letter-spacing:-.2px}
+.ibar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:12px;color:var(--muted)}.ibar-row:last-child{margin-bottom:0}
+.ibar-track{flex:1;height:5px;background:rgba(14,165,233,.08);border-radius:3px;overflow:hidden}.ibar-fill{height:100%;border-radius:3px;background:var(--grad)}
+.testi-wrap{padding:88px 5vw;background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%)}.testi-inner{max-width:1120px;margin:0 auto}.testi-header{text-align:center;margin-bottom:48px}
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.testi-card{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:26px;transition:.3s var(--ease)}
-.testi-card:hover{border-color:var(--border2);transform:translateY(-3px)}
-.testi-stars{color:#F59E0B;font-size:14px;margin-bottom:12px;letter-spacing:2px}
-.testi-text{font-size:14.5px;color:var(--off);line-height:1.7;margin-bottom:20px;font-weight:300}
-.testi-author{display:flex;align-items:center;gap:11px}
-.testi-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;font-family:var(--fd);flex-shrink:0}
-.testi-name{font-size:14px;font-weight:600}
-.testi-role{font-size:12px;color:var(--muted)}
-
-/* ── PORTFOLIO PREVIEW ── */
-.portfolio-section{padding:88px 5vw;position:relative;overflow:hidden}
-.portfolio-inner{max-width:1120px;margin:0 auto;text-align:center}
-.portfolio-mosaic{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:44px 0;pointer-events:none}
-.pm-card{border-radius:14px;overflow:hidden;position:relative}
-.pm-card-tall{grid-row:span 2}
-.pm-visual{width:100%;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--bg3)}
-.pm-visual-inner{height:180px;display:flex;align-items:center;justify-content:center;font-size:36px;position:relative}
-.pm-visual-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(3,9,26,.85) 100%)}
-.pm-label{font-size:12px;font-weight:700;color:var(--muted);margin-top:10px;text-align:left;font-family:var(--fd)}
-.pm-visual-tall{height:374px}
-
-/* ── FOOTER ── */
-footer{border-top:1px solid var(--border);padding:56px 5vw 32px;background:var(--bg2)}
-.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px}
-.footer-brand .logo-name{font-family:var(--fd);font-size:18px;font-weight:800;margin-bottom:12px}
-.footer-brand p{font-size:13.5px;color:var(--muted);line-height:1.65;max-width:240px;margin-bottom:18px}
-.footer-socials{display:flex;gap:10px}
-.social-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;transition:.22s;cursor:pointer}
-.social-btn:hover{border-color:var(--border2);color:var(--sky);background:rgba(14,165,233,.05)}
-.footer-col h4{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--white);margin-bottom:16px}
-.footer-col ul{list-style:none}
-.footer-col ul li{margin-bottom:9px}
-.footer-col ul li a,.footer-col ul li button{font-size:13.5px;color:var(--muted);transition:.2s;background:none;border:none;cursor:pointer;padding:0;font-family:var(--fb)}
-.footer-col ul li a:hover,.footer-col ul li button:hover{color:var(--sky)}
-.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:28px;border-top:1px solid var(--border);font-size:12.5px;color:var(--dim)}
-.footer-links{display:flex;gap:20px}
-.footer-links a{color:var(--dim);transition:.2s}
-.footer-links a:hover{color:var(--muted)}
-
-/* ═══════════════════════════════════════════
-   ████  SUB PAGES  ████
-═══════════════════════════════════════════ */
-.sub-page{padding-top:64px}
-
-/* ── PAGE HERO (shared) ── */
-.page-hero{padding:64px 5vw 52px;text-align:center;background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
-.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(14,165,233,.09) 0%,transparent 65%)}
-.page-hero-inner{position:relative;z-index:1}
-.page-hero h1{font-family:var(--fd);font-size:clamp(32px,4vw,56px);font-weight:900;letter-spacing:-1.8px;line-height:1.05;margin-bottom:14px}
-.page-hero p{font-size:16px;color:var(--muted);max-width:540px;margin:0 auto;line-height:1.7;font-weight:300}
-
-/* ── BACK NAV ── */
-.back-nav{padding:20px 5vw;background:var(--bg2);border-bottom:1px solid var(--border)}
-.back-btn{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:var(--muted);background:none;border:none;cursor:pointer;transition:.2s;font-family:var(--fb);font-weight:500}
-.back-btn:hover{color:var(--white)}
-
-/* ═══ EMR PAGE ═══ */
-.emr-main{max-width:900px;margin:0 auto;padding:72px 5vw;text-align:center}
-.emr-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;border:1px solid rgba(20,184,166,.3);border-radius:100px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);background:rgba(20,184,166,.06);margin-bottom:28px}
-.emr-badge span{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 1.5s infinite}
-.emr-main h2{font-family:var(--fd);font-size:clamp(30px,3.8vw,52px);font-weight:900;letter-spacing:-1.5px;margin-bottom:18px}
-.emr-main>p{font-size:16px;color:var(--muted);max-width:560px;margin:0 auto 48px;line-height:1.75;font-weight:300}
-.emr-features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:56px;text-align:left}
-.emr-feat{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:22px 18px}
-.emr-feat-icon{font-size:22px;margin-bottom:10px}
-.emr-feat-title{font-family:var(--fd);font-size:14.5px;font-weight:700;margin-bottom:6px;letter-spacing:-.25px}
-.emr-feat-text{font-size:12.5px;color:var(--muted);line-height:1.6}
-.emr-demo-box{background:var(--bg3);border:1px solid var(--border2);border-radius:20px;padding:44px;text-align:center;position:relative;overflow:hidden}
-.emr-demo-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent)}
-.emr-demo-box h3{font-family:var(--fd);font-size:26px;font-weight:800;letter-spacing:-.6px;margin-bottom:12px}
-.emr-demo-box p{font-size:14.5px;color:var(--muted);margin-bottom:28px;font-weight:300;line-height:1.65}
-.emr-form{max-width:480px;margin:0 auto;text-align:left}
-
-/* ═══ TOOLS PAGE ═══ */
-.tools-page-main{max-width:1200px;margin:0 auto;padding:48px 5vw 80px}
-.tools-toggle-wrap{display:flex;justify-content:center;margin-bottom:36px}
-.tools-toggle{display:flex;background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:4px;gap:4px}
-.tt-btn{padding:9px 24px;border-radius:9px;border:none;cursor:pointer;font-family:var(--fb);font-size:13.5px;font-weight:600;transition:.3s var(--ease);background:transparent;color:var(--muted)}
-.tt-btn.active{background:var(--grad);color:#fff;box-shadow:0 4px 14px rgba(14,165,233,.28)}
-.tools-subcat-bar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:32px}
-.tsc-btn{padding:6px 14px;border-radius:100px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-family:var(--fb);font-size:12.5px;font-weight:500;cursor:pointer;transition:.25s}
-.tsc-btn:hover{border-color:var(--border3);color:var(--white);background:rgba(14,165,233,.06)}
-.tsc-btn.active{background:rgba(14,165,233,.12);border-color:var(--border3);color:var(--sky)}
-.tools-cat-section{margin-bottom:44px}
-.tools-cat-title{font-family:var(--fd);font-size:18px;font-weight:800;letter-spacing:-.4px;margin-bottom:16px;display:flex;align-items:center;gap:9px}
-.tc-count{font-size:11px;font-weight:700;color:var(--cyan);background:rgba(14,165,233,.1);border:1px solid var(--border2);padding:2px 9px;border-radius:100px;font-family:var(--fb)}
-.tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
-.tool-card{background:var(--bg3);border:1px solid var(--border);border-radius:13px;padding:18px 14px;cursor:pointer;transition:.3s var(--ease);display:flex;flex-direction:column;position:relative}
-.tool-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.35)}
-.tc-icon{width:38px;height:38px;border-radius:9px;background:rgba(14,165,233,.07);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:11px;flex-shrink:0}
-.tc-name{font-family:var(--fd);font-size:13.5px;font-weight:700;margin-bottom:4px;letter-spacing:-.2px;flex:1}
-.tc-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:11px}
-.tc-action{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;color:var(--cyan);background:none;border:none;cursor:pointer;padding:0;font-family:var(--fb);transition:.2s}
-.tc-action:hover{gap:7px;color:var(--sky)}
-.premium-badge{position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:4px;padding:2px 8px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);border-radius:6px;font-size:9.5px;font-weight:700;color:#F59E0B;letter-spacing:.5px;font-family:var(--fb)}
-
-/* TOOL MODAL */
-.tool-modal-overlay{position:fixed;inset:0;background:rgba(3,9,26,.87);z-index:600;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
-.tool-modal-overlay.open{display:flex}
-.tool-modal{background:var(--bg3);border:1px solid var(--border2);border-radius:20px;width:100%;max-width:800px;max-height:88vh;overflow-y:auto;position:relative;animation:modalIn .38s var(--ease)}
-@keyframes modalIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
-.tool-modal::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
-.modal-header{padding:26px 28px 0;display:flex;align-items:flex-start;justify-content:space-between}
-.modal-title{font-family:var(--fd);font-size:20px;font-weight:800;letter-spacing:-.4px;margin-bottom:3px}
-.modal-sub{font-size:12.5px;color:var(--muted)}
-.modal-close{width:32px;height:32px;border-radius:50%;background:rgba(14,165,233,.07);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);font-size:15px;transition:.22s;flex-shrink:0}
-.modal-close:hover{background:rgba(14,165,233,.15);color:var(--white)}
-.modal-body{padding:22px 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.modal-inputs h4,.modal-results h4{font-family:var(--fd);font-size:14px;font-weight:700;margin-bottom:16px}
-.calc-submit{width:100%;padding:11px;background:var(--grad);border:none;border-radius:10px;color:#fff;font-family:var(--fb);font-size:14px;font-weight:700;cursor:pointer;transition:.28s;margin-top:4px}
-.calc-submit:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(14,165,233,.35)}
-.result-box{background:rgba(14,165,233,.04);border:1px solid var(--border);border-radius:12px;padding:18px;min-height:96px}
-.r-val{font-family:var(--fd);font-size:34px;font-weight:900;letter-spacing:-1px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.r-unit{font-size:13.5px;color:var(--muted);margin-top:2px}
-.r-interp{margin-top:13px;padding:13px;background:rgba(20,184,166,.06);border:1px solid rgba(20,184,166,.15);border-radius:9px;font-size:12px;color:var(--off);line-height:1.65}
-.r-interp strong{color:var(--teal)}
-.r-note{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6}
-.modal-footer{display:flex;gap:8px;padding:0 28px 24px}
-.modal-footer-btn{flex:1;padding:9px;border-radius:8px;border:1px solid var(--border2);background:rgba(14,165,233,.04);color:var(--muted);font-family:var(--fb);font-size:12px;font-weight:600;cursor:pointer;transition:.22s}
-.modal-footer-btn:hover{border-color:var(--border3);color:var(--sky)}
-
-/* ═══ MARKETING PAGE ═══ */
-.marketing-main{max-width:1120px;margin:0 auto;padding:64px 5vw 80px}
-.mkt-overview{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin-bottom:64px}
-.mkt-overview h2{font-family:var(--fd);font-size:clamp(26px,3.2vw,42px);font-weight:800;letter-spacing:-1.2px;margin-bottom:16px}
-.mkt-overview p{font-size:15px;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:20px}
-.mkt-services{display:flex;flex-direction:column;gap:12px}
-.mkt-svc{display:flex;align-items:flex-start;gap:13px;padding:16px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;transition:.25s}
-.mkt-svc:hover{border-color:var(--border2)}
-.mkt-svc-icon{width:36px;height:36px;border-radius:9px;background:rgba(14,165,233,.08);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.mkt-svc-title{font-size:14px;font-weight:700;margin-bottom:3px;font-family:var(--fd);letter-spacing:-.2px}
-.mkt-svc-text{font-size:12.5px;color:var(--muted);line-height:1.55}
-.mkt-form-section{background:var(--bg3);border:1px solid var(--border2);border-radius:20px;padding:40px;position:relative;overflow:hidden}
-.mkt-form-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
-.mkt-form-section h3{font-family:var(--fd);font-size:24px;font-weight:800;letter-spacing:-.6px;margin-bottom:8px}
-.mkt-form-section>p{font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.6;font-weight:300}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.submit-btn{width:100%;padding:13px;background:var(--grad);border:none;border-radius:11px;color:#fff;font-family:var(--fb);font-size:15px;font-weight:700;cursor:pointer;transition:.3s var(--ease);letter-spacing:-.1px;margin-top:6px}
-.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(14,165,233,.38)}
-.form-success{display:none;text-align:center;padding:28px;background:rgba(20,184,166,.08);border:1px solid rgba(20,184,166,.22);border-radius:12px;margin-top:16px}
-.form-success-icon{font-size:36px;margin-bottom:10px}
-.form-success h4{font-family:var(--fd);font-size:18px;font-weight:800;margin-bottom:6px}
-.form-success p{font-size:14px;color:var(--muted);line-height:1.6}
-
-/* ═══ CONSULTATION PAGE ═══ */
-.consult-main{max-width:1120px;margin:0 auto;padding:64px 5vw 80px}
-.consult-overview{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:60px}
-.consult-overview h2{font-family:var(--fd);font-size:clamp(24px,3vw,38px);font-weight:800;letter-spacing:-1px;margin-bottom:14px}
-.consult-overview p{font-size:15px;color:var(--muted);line-height:1.75;font-weight:300}
-.consult-areas{display:flex;flex-direction:column;gap:11px}
-.consult-area{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:11px}
-.ca-dot{width:8px;height:8px;border-radius:50%;background:var(--grad);flex-shrink:0}
-.ca-title{font-size:14px;font-weight:600;font-family:var(--fd)}
-.ca-sub{font-size:12px;color:var(--muted);margin-top:1px}
-.consult-forms{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.consult-form-card{background:var(--bg3);border:1px solid var(--border2);border-radius:18px;padding:32px;position:relative;overflow:hidden}
-.consult-form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
-.consult-form-card h3{font-family:var(--fd);font-size:20px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
-.consult-form-card>p{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.6;font-weight:300}
-
-/* ═══ PORTFOLIO PAGE ═══ */
-.portfolio-page-main{max-width:1200px;margin:0 auto;padding:48px 5vw 80px}
-.pf-filter-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px;justify-content:center}
-.pf-filter{padding:8px 18px;border-radius:100px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-family:var(--fb);font-size:13px;font-weight:600;cursor:pointer;transition:.25s}
-.pf-filter:hover{border-color:var(--border3);color:var(--white)}
-.pf-filter.active{background:rgba(14,165,233,.12);border-color:var(--border3);color:var(--sky)}
-.pf-client-block{margin-bottom:64px}
-.pf-client-header{display:flex;align-items:center;gap:20px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--border)}
-.pf-client-logo{width:64px;height:64px;border-radius:14px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;letter-spacing:.5px;flex-shrink:0}
-.pf-client-name{font-family:var(--fd);font-size:22px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px}
-.pf-client-desc{font-size:13.5px;color:var(--muted);line-height:1.55;max-width:500px}
-.pf-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
-.pf-tag{font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:3px 9px;border-radius:100px;font-family:var(--fb)}
-.pf-work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
-.pf-work-card{background:var(--bg3);border:1px solid var(--border);border-radius:13px;overflow:hidden;transition:.3s var(--ease)}
-.pf-work-card:hover{border-color:var(--border2);transform:translateY(-3px)}
-.pf-work-visual{height:150px;display:flex;align-items:center;justify-content:center;font-size:32px;position:relative;overflow:hidden}
-.pf-work-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(3,9,26,.8) 100%)}
-.pf-work-body{padding:14px}
-.pf-work-type{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;font-family:var(--fb)}
-.pf-work-title{font-family:var(--fd);font-size:14px;font-weight:700;letter-spacing:-.25px}
-.pf-impacts{display:flex;gap:0;background:var(--bg3);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.pf-impact{flex:1;padding:16px 12px;text-align:center;border-right:1px solid var(--border)}
-.pf-impact:last-child{border-right:none}
-.pfi-val{font-family:var(--fd);font-size:19px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.pfi-lbl{font-size:10.5px;color:var(--muted);margin-top:2px;font-family:var(--fb)}
-
-/* ═══════════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════════ */
-@media(max-width:1024px){
-  .services-grid,.impact-grid{grid-template-columns:1fr 1fr}
-  .tools-preview-grid,.tools-grid{grid-template-columns:repeat(3,1fr)}
-  .footer-grid{grid-template-columns:1fr 1fr}
-  .emr-features{grid-template-columns:1fr 1fr}
-  .pf-work-grid{grid-template-columns:1fr 1fr}
-  .portfolio-mosaic{grid-template-columns:1fr 1fr}
-  .pm-card-tall{grid-row:span 1}
-  .pm-visual-tall{height:180px}
-}
-@media(max-width:768px){
-  .nav-links{display:none}.hamburger{display:flex}
-  .services-grid,.grid-2,.grid-3,.grid-4,.mkt-overview,.consult-overview,.consult-forms,.form-row,.why-grid,.testi-grid,.impact-bars,.invite-inner,.modal-body,.emr-features,.pf-work-grid,.pf-impacts{grid-template-columns:1fr}
-  .tools-preview-grid,.tools-grid{grid-template-columns:1fr 1fr}
-  .hero-stats{gap:28px}
-  .impact-grid{border-radius:14px}
-  .impact-stat{border-right:none;border-bottom:1px solid var(--border)}
-  .impact-stat:last-child{border-bottom:none}
-  .portfolio-mosaic{grid-template-columns:1fr}
-  .pf-impacts{flex-direction:column}
-  .pf-impact{border-right:none;border-bottom:1px solid var(--border)}
-  .pf-impact:last-child{border-bottom:none}
-  .footer-grid{grid-template-columns:1fr 1fr}
-  .footer-bottom{flex-direction:column;gap:12px;text-align:center}
-}
-@media(max-width:480px){
-  .hero-btns{flex-direction:column;align-items:stretch}.hero-btns .btn{justify-content:center}
-  .tools-preview-grid,.tools-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-}
+.tc{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:26px;transition:.3s var(--ease)}.tc:hover{border-color:var(--border2);transform:translateY(-3px)}
+.tc-stars{color:#F59E0B;font-size:13px;margin-bottom:12px;letter-spacing:2px}
+.tc-text{font-size:14px;color:var(--off);line-height:1.72;margin-bottom:20px;font-weight:300;font-style:italic}
+.tc-author{display:flex;align-items:center;gap:12px}
+.tc-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:12px;font-weight:700;flex-shrink:0}
+.tc-name{font-family:var(--fd);font-size:14px;font-weight:700;letter-spacing:-.3px}.tc-role{font-size:11.5px;color:var(--muted)}
+.pf-wrap{padding:88px 5vw;background:var(--bg3)}.pf-inner{max-width:1120px;margin:0 auto;text-align:center}
+.pf-mosaic{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px}
+.pm-vis{border-radius:14px;height:180px;display:flex;align-items:center;justify-content:center;font-size:40px;border:1px solid rgba(255,255,255,.06);overflow:hidden;position:relative;transition:.35s var(--ease);cursor:pointer;flex-direction:column;gap:6px}
+.pm-vis:hover{transform:translateY(-4px);box-shadow:0 16px 44px rgba(0,0,0,.5)}
+.pm-vis span{font-size:11px;font-weight:600;color:rgba(255,255,255,.7);font-family:var(--fd)}
+.pm-lbl{font-family:var(--fd);font-size:12px;font-weight:600;color:var(--muted);margin-top:12px;letter-spacing:.5px}
+.cta-strip{padding:72px 5vw;background:linear-gradient(135deg,var(--bg3) 0%,var(--bg4) 100%);text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.cta-strip h2{font-family:var(--fd);font-size:clamp(26px,3.5vw,46px);font-weight:800;letter-spacing:-2px;margin-bottom:16px}
+.cta-strip p{font-size:15px;color:var(--muted);max-width:520px;margin:0 auto 32px;font-weight:300}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+@media(max-width:900px){.srv-grid{grid-template-columns:1fr 1fr}.tprev-grid{grid-template-columns:1fr 1fr}.why-grid{grid-template-columns:1fr 1fr}.impact-grid{grid-template-columns:1fr 1fr}.testi-grid{grid-template-columns:1fr}.pf-mosaic{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.srv-grid{grid-template-columns:1fr}.impact-bars{grid-template-columns:1fr}.pf-mosaic{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
-<!-- ═══════════════════════
-     NAV
-═══════════════════════ -->
 <nav id="nav">
-  <div class="nav-logo" onclick="goPage('home')">
-    <div class="logo-mark">
-      <svg viewBox="0 0 20 20" fill="none"><rect x="8" y="2" width="4" height="16" rx="2" fill="rgba(255,255,255,.95)"/><rect x="2" y="8" width="16" height="4" rx="2" fill="rgba(255,255,255,.95)"/><circle cx="10" cy="10" r="2.5" fill="rgba(255,255,255,.28)"/></svg>
-    </div>
-    <div class="logo-text">
-      <span class="logo-name">Clixa Health</span>
-      <span class="logo-sub">Digital Health Innovation</span>
-    </div>
-  </div>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark"><svg viewBox="0 0 20 20" fill="none"><rect x="8" y="2" width="4" height="16" rx="2" fill="rgba(255,255,255,.95)"/><rect x="2" y="8" width="16" height="4" rx="2" fill="rgba(255,255,255,.95)"/></svg></div>
+    <div class="logo-text"><span class="logo-name">Clixa Health</span><span class="logo-sub">Digital Health Innovation</span></div>
+  </a>
   <ul class="nav-links">
-    <li><button onclick="goPage('home')">Home</button></li>
-    <li><button onclick="goPage('emr')">Clixa EMR</button></li>
-    <li><button onclick="goPage('tools')">Health Tools</button></li>
-    <li><button onclick="goPage('marketing')">Marketing</button></li>
-    <li><button onclick="goPage('consult')">Consultancy</button></li>
-    <li><button onclick="goPage('portfolio')">Portfolio</button></li>
-    <li><button class="nav-cta" onclick="goPage('consult')">Book Consultation</button></li>
+    <li><a href="emr.html" class="nav-link">Clixa EMR</a></li>
+    <li><a href="tools.html" class="nav-link">Clinical Tools</a></li>
+    <li><a href="marketing.html" class="nav-link">Marketing</a></li>
+    <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+    <li><a href="consultancy.html" class="nav-link nav-cta">Book Consultation</a></li>
   </ul>
-  <button class="hamburger" onclick="toggleMob()"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
-<div class="mobile-nav" id="mob">
-  <button onclick="goPage('home');closeMob()">Home</button>
-  <button onclick="goPage('emr');closeMob()">Clixa EMR</button>
-  <button onclick="goPage('tools');closeMob()">Digital Health Tools</button>
-  <button onclick="goPage('marketing');closeMob()">Healthcare Marketing</button>
-  <button onclick="goPage('consult');closeMob()">Strategic Consultancy</button>
-  <button onclick="goPage('portfolio');closeMob()">Portfolio</button>
-  <button onclick="goPage('consult');closeMob()" style="color:var(--sky);font-weight:700;border:none;border-top:1px solid var(--border)">Book a Consultation →</button>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="emr.html">Clixa EMR</a><a href="tools.html">Clinical Tools</a>
+  <a href="marketing.html">Marketing</a><a href="portfolio.html">Portfolio</a>
+  <a href="consultancy.html">Book Consultation</a>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════
-     HOME PAGE
-═══════════════════════════════════════════════════════ -->
-<div id="page-home" class="page active">
+<section class="hero">
+  <div class="hero-glow"></div><div class="hero-grid"></div>
+  <div class="hero-tag" style="position:relative;z-index:1"><div class="hero-dot"></div> Africa's #1 Digital Health Innovation Company</div>
+  <h1 class="display" style="position:relative;z-index:1">We Build the <span class="grad-text">Digital Backbone</span><br>of Modern Healthcare</h1>
+  <p style="position:relative;z-index:1">From AI-powered EMRs to clinical decision tools, brand-to-digital transformation, and healthcare strategy &mdash; Clixa Health is the partner healthcare leaders trust.</p>
+  <div class="hero-btns"><a href="consultancy.html" class="btn btn-grad btn-lg">Book a Free Consultation &rarr;</a><a href="portfolio.html" class="btn btn-outline btn-lg">View Our Work</a></div>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-val">150+</div><div class="hs-lbl">Healthcare Clients</div></div>
+    <div class="hs"><div class="hs-val">60+</div><div class="hs-lbl">Clinical Tools</div></div>
+    <div class="hs"><div class="hs-val">320%</div><div class="hs-lbl">Avg. Patient Growth</div></div>
+    <div class="hs"><div class="hs-val">98%</div><div class="hs-lbl">Client Retention</div></div>
+  </div>
+</section>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg">
-      <div class="hero-glow"></div>
-      <div class="hero-grid"></div>
-    </div>
-    <div class="hero-tag"><span class="hero-dot"></span>Doctor-Founded · AI-Powered · Africa's Digital Health Leader</div>
-    <h1 class="display">The Future of<br><span class="grad-text">Healthcare</span> is Digital</h1>
-    <p>Clixa Health empowers healthcare organizations with cutting-edge digital health technology, clinical tools, growth marketing, and strategic consultancy — all under one roof.</p>
-    <div class="hero-btns">
-      <button class="btn btn-grad btn-lg" onclick="goPage('consult')">Get Started Today →</button>
-      <button class="btn btn-outline btn-lg" onclick="goPage('tools')">Explore Health Tools</button>
-    </div>
-    <div class="hero-stats">
-      <div class="hs"><div class="hs-val">150+</div><div class="hs-lbl">Healthcare Clients</div></div>
-      <div class="hs"><div class="hs-val">60+</div><div class="hs-lbl">Clinical Tools</div></div>
-      <div class="hs"><div class="hs-val">98%</div><div class="hs-lbl">Client Satisfaction</div></div>
-      <div class="hs"><div class="hs-val">5+</div><div class="hs-lbl">Countries Served</div></div>
-    </div>
-  </section>
-
-  <!-- INVITE -->
-  <section class="section invite-section">
-    <div class="invite-inner reveal">
-      <div class="invite-content">
-        <div class="label" style="margin-bottom:16px">For Healthcare Businesses</div>
-        <h2 class="display" style="font-size:clamp(26px,3.2vw,44px)">Grow Your Healthcare Business with Digital Innovation</h2>
-        <p>Whether you run a hospital, clinic, diagnostic lab, or health-tech startup — Clixa Health delivers the technology, marketing, and strategy to help you grow, reach more patients, and lead your market.</p>
-        <div class="invite-pills">
-          <div class="pill">🏥 Hospitals & Clinics</div>
-          <div class="pill">🔬 Diagnostic Labs</div>
-          <div class="pill">💊 Pharmacies</div>
-          <div class="pill">🤖 Health-Tech Startups</div>
-          <div class="pill">📱 Telehealth Providers</div>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <button class="btn btn-grad" onclick="goPage('marketing')">Get Marketing Solutions →</button>
-          <button class="btn btn-outline" onclick="goPage('emr')">Explore Clixa EMR</button>
-        </div>
-      </div>
-      <div class="invite-visual">
-        <div class="invite-card">
-          <div style="font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.5px;margin-bottom:14px;font-family:var(--fd)">GROWTH DASHBOARD</div>
-          <div class="mini-stat-grid">
-            <div class="mini-stat"><div class="ms-val">+340%</div><div class="ms-lbl">Patient Inquiries</div></div>
-            <div class="mini-stat"><div class="ms-val">4.9★</div><div class="ms-lbl">Google Rating</div></div>
-            <div class="mini-stat"><div class="ms-val">2.4×</div><div class="ms-lbl">Organic Traffic</div></div>
-            <div class="mini-stat"><div class="ms-val">92%</div><div class="ms-lbl">Booking Rate</div></div>
-          </div>
-          <div style="font-size:11px;color:var(--muted);margin-bottom:10px;font-family:var(--fd);font-weight:600">MARKETING PERFORMANCE</div>
-          <div class="invite-bar-row"><span style="width:80px">SEO Traffic</span><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div><span>88%</span></div>
-          <div class="invite-bar-row"><span style="width:80px">Social Reach</span><div class="bar-track"><div class="bar-fill" style="width:74%"></div></div><span>74%</span></div>
-          <div class="invite-bar-row"><span style="width:80px">Conversions</span><div class="bar-track"><div class="bar-fill" style="width:92%"></div></div><span>92%</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section class="section" style="padding:0 0 88px">
-    <div class="services-section-wrap">
-      <div class="services-section">
-        <div class="services-header reveal">
-          <div class="label" style="justify-content:center;margin-bottom:14px">Our Solutions</div>
-          <h2 class="display" style="font-size:clamp(28px,3.5vw,50px)">Everything Your Healthcare Business Needs</h2>
-          <p class="sub" style="margin:12px auto 0;font-size:15px">Four integrated solutions designed specifically for healthcare organizations.</p>
-        </div>
-        <div class="services-grid reveal">
-          <div class="srv-card" onclick="goPage('emr')">
-            <div class="srv-icon">🖥️</div>
-            <div class="srv-title">Clixa EMR</div>
-            <div class="srv-desc">A modern, cloud-based Electronic Medical Records system built for African healthcare — fast, compliant, and clinically intelligent.</div>
-            <button class="srv-link">Learn More →</button>
-          </div>
-          <div class="srv-card" onclick="goPage('tools')">
-            <div class="srv-icon">🧪</div>
-            <div class="srv-title">Digital Health Tools</div>
-            <div class="srv-desc">60+ clinical calculators and health trackers for both healthcare professionals and patients — from BMI to ASCVD risk scoring.</div>
-            <button class="srv-link">Explore Tools →</button>
-          </div>
-          <div class="srv-card" onclick="goPage('marketing')">
-            <div class="srv-icon">📣</div>
-            <div class="srv-title">Healthcare Marketing</div>
-            <div class="srv-desc">Doctor-informed digital marketing that brings real patients to your door — SEO, social media, branding, and paid campaigns.</div>
-            <button class="srv-link">Get a Quote →</button>
-          </div>
-          <div class="srv-card" onclick="goPage('consult')">
-            <div class="srv-icon">💡</div>
-            <div class="srv-title">Strategic Consultancy</div>
-            <div class="srv-desc">High-level healthcare strategy from physicians and business experts — digital transformation, market entry, and growth planning.</div>
-            <button class="srv-link">Book a Session →</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TOOLS PREVIEW -->
-  <section class="tools-preview-section">
-    <div class="tools-inner">
-      <div class="tools-header reveal">
-        <div class="label" style="justify-content:center;margin-bottom:14px">Clinical Tools</div>
-        <h2 class="display" style="font-size:clamp(26px,3.2vw,46px)">Intelligent Health Tools at Your Fingertips</h2>
-        <p class="sub" style="margin:12px auto 0">Used by clinicians and patients across Africa for fast, accurate clinical decisions.</p>
-      </div>
-      <div class="tools-preview-grid reveal">
-        <div class="tool-prev-card" onclick="goPage('tools')">
-          <div class="tpc-icon">⚖️</div>
-          <div class="tpc-name">BMI Calculator</div>
-          <div class="tpc-desc">Body Mass Index with WHO clinical categories and interpretation.</div>
-          <button class="tpc-launch">Open Tool →</button>
-        </div>
-        <div class="tool-prev-card" onclick="goPage('tools')">
-          <div class="tpc-icon">❤️</div>
-          <div class="tpc-name">ASCVD Risk Score</div>
-          <div class="tpc-desc">10-year cardiovascular disease risk using ACC/AHA Pooled Cohort Equations.</div>
-          <button class="tpc-launch">Open Tool →</button>
-        </div>
-        <div class="tool-prev-card" onclick="goPage('tools')">
-          <div class="tpc-icon">🤰</div>
-          <div class="tpc-name">Pregnancy Due Date</div>
-          <div class="tpc-desc">EDD calculation with gestational age tracker using Naegele's rule.</div>
-          <button class="tpc-launch">Open Tool →</button>
-        </div>
-        <div class="tool-prev-card" onclick="goPage('tools')">
-          <div class="tpc-icon">🧠</div>
-          <div class="tpc-name">Glasgow Coma Scale</div>
-          <div class="tpc-desc">Neurological status assessment with TBI severity classification.</div>
-          <button class="tpc-launch">Open Tool →</button>
-        </div>
-        <div class="tool-prev-card" onclick="goPage('tools')">
-          <div class="tpc-icon">🔬</div>
-          <div class="tpc-name">eGFR Calculator</div>
-          <div class="tpc-desc">CKD-EPI 2021 kidney function estimation and staging.</div>
-          <button class="tpc-launch">Open Tool →</button>
-        </div>
-      </div>
-      <div style="text-align:center">
-        <button class="btn btn-grad btn-lg" onclick="goPage('tools')">View All 60+ Tools →</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY DIGITAL HEALTH -->
-  <section class="why-section">
-    <div class="why-inner">
-      <div class="why-header reveal">
-        <div class="label" style="justify-content:center;margin-bottom:14px">Why It Matters</div>
-        <h2 class="display" style="font-size:clamp(26px,3.2vw,46px)">Why Digital Health Solutions Are Critical</h2>
-        <p class="sub" style="margin:12px auto 0">The global shift to digital healthcare is not a trend — it's the new standard of care.</p>
-      </div>
-      <div class="why-grid reveal">
-        <div class="why-card">
-          <div class="why-icon">📈</div>
-          <div class="why-title">Reach More Patients</div>
-          <div class="why-text">Digital presence allows healthcare providers to reach 3–5× more patients through search, social media, and online booking — without increasing costs proportionally.</div>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">⚡</div>
-          <div class="why-title">Faster Clinical Decisions</div>
-          <div class="why-text">Digital clinical tools reduce the time needed for risk calculations and diagnosis support by up to 70%, allowing clinicians to see more patients and reduce errors.</div>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">🌍</div>
-          <div class="why-title">Africa's Digital Health Gap</div>
-          <div class="why-text">Sub-Saharan Africa has the largest unmet need for digital health infrastructure in the world. Organizations that digitize now will lead the market for the next decade.</div>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">🤖</div>
-          <div class="why-title">AI-Augmented Care</div>
-          <div class="why-text">AI-powered health tools improve diagnostic accuracy, reduce misdiagnosis rates, and support clinicians with evidence-based decision support at the point of care.</div>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">📱</div>
-          <div class="why-title">Patient Empowerment</div>
-          <div class="why-text">Digital health tools empower patients to monitor their own health, improving adherence to treatment and early detection of conditions before they become emergencies.</div>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">💰</div>
-          <div class="why-title">ROI for Healthcare Orgs</div>
-          <div class="why-text">Healthcare organizations that invest in digital strategies see an average 2–4× return through increased patient volume, improved retention, and reduced no-show rates.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- IMPACT -->
-  <section class="impact-section">
-    <div class="impact-inner">
-      <div class="impact-header reveal">
-        <div class="label" style="justify-content:center;margin-bottom:14px">Our Impact</div>
-        <h2 class="display" style="font-size:clamp(26px,3.2vw,46px)">Numbers That Speak for Themselves</h2>
-        <p class="sub" style="margin:12px auto 0">Results we've delivered for healthcare organizations across Africa and beyond.</p>
-      </div>
-      <div class="impact-grid reveal">
-        <div class="impact-stat"><div class="is-val">150+</div><div class="is-lbl">Healthcare Clients</div></div>
-        <div class="impact-stat"><div class="is-val">320%</div><div class="is-lbl">Avg. Patient Growth</div></div>
-        <div class="impact-stat"><div class="is-val">2.4M</div><div class="is-lbl">Social Media Reach</div></div>
-        <div class="impact-stat"><div class="is-val">98%</div><div class="is-lbl">Client Retention</div></div>
-      </div>
-      <div class="impact-bars reveal">
-        <div class="impact-bar-card">
-          <div class="ibc-title">Marketing Performance Metrics</div>
-          <div class="ibc-row"><span style="width:120px">SEO Rankings</span><div class="ibc-track"><div class="ibc-fill" style="width:92%"></div></div><span>92%</span></div>
-          <div class="ibc-row"><span style="width:120px">Patient Inquiries</span><div class="ibc-track"><div class="ibc-fill" style="width:87%"></div></div><span>87%</span></div>
-          <div class="ibc-row"><span style="width:120px">Social Engagement</span><div class="ibc-track"><div class="ibc-fill" style="width:79%"></div></div><span>79%</span></div>
-          <div class="ibc-row"><span style="width:120px">Brand Awareness</span><div class="ibc-track"><div class="ibc-fill" style="width:95%"></div></div><span>95%</span></div>
-        </div>
-        <div class="impact-bar-card">
-          <div class="ibc-title">Digital Health Technology Impact</div>
-          <div class="ibc-row"><span style="width:120px">Platform Uptime</span><div class="ibc-track"><div class="ibc-fill" style="width:99%"></div></div><span>99%</span></div>
-          <div class="ibc-row"><span style="width:120px">User Satisfaction</span><div class="ibc-track"><div class="ibc-fill" style="width:96%"></div></div><span>96%</span></div>
-          <div class="ibc-row"><span style="width:120px">Booking Rate</span><div class="ibc-track"><div class="ibc-fill" style="width:92%"></div></div><span>92%</span></div>
-          <div class="ibc-row"><span style="width:120px">Cost Reduction</span><div class="ibc-track"><div class="ibc-fill" style="width:68%"></div></div><span>68%</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="testi-section">
-    <div class="testi-inner">
-      <div class="testi-header reveal">
-        <div class="label" style="justify-content:center;margin-bottom:14px">Client Stories</div>
-        <h2 class="display" style="font-size:clamp(26px,3.2vw,44px)">What Our Clients Say</h2>
-      </div>
-      <div class="testi-grid reveal">
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <div class="testi-text">"Clixa Health transformed how we reach patients. Within 3 months of working with them, our online patient inquiries increased by over 300%. The team truly understands healthcare."</div>
-          <div class="testi-author"><div class="testi-av" style="background:linear-gradient(135deg,#0EA5E9,#14B8A6)">DB</div><div><div class="testi-name">Dr. Bekele Tadesse</div><div class="testi-role">CEO, Grand Bishoftu Hospital</div></div></div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <div class="testi-text">"The digital health tools Clixa built for our platform have been a game-changer for our MCH program. Our nurses use them daily for clinical calculations. Exceptional product."</div>
-          <div class="testi-author"><div class="testi-av" style="background:linear-gradient(135deg,#A78BFA,#06B6D4)">SA</div><div><div class="testi-name">Sister Amara Gebre</div><div class="testi-role">Clinical Lead, EtCare MCH</div></div></div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <div class="testi-text">"We engaged Clixa for our rebranding and digital marketing. Our social following grew from 800 to 18,000 in 8 months. The content they produce is clinically credible and highly engaging."</div>
-          <div class="testi-author"><div class="testi-av" style="background:linear-gradient(135deg,#14B8A6,#0EA5E9)">FM</div><div><div class="testi-name">Dr. Feven Mulugeta</div><div class="testi-role">Director, Addis Hiwot Hospital</div></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO SECTION -->
-  <section class="portfolio-section">
-    <div class="portfolio-inner reveal">
-      <div class="label" style="justify-content:center;margin-bottom:14px">Our Work</div>
-      <h2 class="display" style="font-size:clamp(26px,3.2vw,46px)">We've Helped Healthcare Leaders<br><span class="grad-text">Build, Grow & Innovate</span></h2>
-      <p style="color:var(--muted);font-size:15px;max-width:520px;margin:14px auto 0;line-height:1.7;font-weight:300">From hospital rebrands to full digital health platforms — see the work that's transforming healthcare across Africa.</p>
-      <div class="portfolio-mosaic" style="margin-top:44px;pointer-events:auto">
-        <div>
-          <div class="pm-visual" style="background:linear-gradient(135deg,#0a1628,#0d3060)">
-            <div class="pm-visual-inner">🏥<span style="position:absolute;bottom:12px;left:12px;z-index:2;font-size:11px;font-weight:700;color:rgba(255,255,255,.7)">Dream Ortho Spine</span></div>
-          </div>
-          <div class="pm-label">Website & Patient Platform</div>
-        </div>
-        <div>
-          <div class="pm-visual" style="background:linear-gradient(135deg,#1a0a2e,#2d1060)">
-            <div class="pm-visual-inner">🌸<span style="position:absolute;bottom:12px;left:12px;z-index:2;font-size:11px;font-weight:700;color:rgba(255,255,255,.7)">EtCare MCH</span></div>
-          </div>
-          <div class="pm-label">MCH Digital Platform</div>
-        </div>
-        <div>
-          <div class="pm-visual" style="background:linear-gradient(135deg,#2e1a0a,#4a2a08)">
-            <div class="pm-visual-inner">🔬<span style="position:absolute;bottom:12px;left:12px;z-index:2;font-size:11px;font-weight:700;color:rgba(255,255,255,.7)">BMY Diagnostics</span></div>
-          </div>
-          <div class="pm-label">Lab Platform & Brand</div>
-        </div>
-      </div>
-      <button class="btn btn-grad btn-lg" onclick="goPage('portfolio')">View Full Portfolio →</button>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
-          <div class="logo-mark" style="width:30px;height:30px;border-radius:8px"><svg viewBox="0 0 20 20" fill="none" style="width:16px;height:16px"><rect x="8" y="2" width="4" height="16" rx="2" fill="rgba(255,255,255,.95)"/><rect x="2" y="8" width="16" height="4" rx="2" fill="rgba(255,255,255,.95)"/></svg></div>
-          <span class="logo-name" style="font-family:var(--fd);font-size:17px;font-weight:800">Clixa Health</span>
-        </div>
-        <p>Africa's leading digital health innovation company — founded by doctors, built by technology experts.</p>
-        <div class="footer-socials">
-          <div class="social-btn">in</div><div class="social-btn">𝕏</div><div class="social-btn">▶</div><div class="social-btn">@</div>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <ul>
-          <li><button onclick="goPage('emr')">Clixa EMR</button></li>
-          <li><button onclick="goPage('tools')">Digital Health Tools</button></li>
-          <li><button onclick="goPage('marketing')">Healthcare Marketing</button></li>
-          <li><button onclick="goPage('consult')">Strategic Consultancy</button></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><button onclick="goPage('portfolio')">Our Portfolio</button></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Blog & Insights</a></li>
-          <li><a href="#">Careers</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:hello@clixahealth.com">hello@clixahealth.com</a></li>
-          <li><a href="#">Addis Ababa, Ethiopia</a></li>
-          <li><button onclick="goPage('consult')">Book a Consultation</button></li>
-          <li><button onclick="goPage('marketing')">Request a Quote</button></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Clixa Health. All rights reserved.</span>
-      <div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">HIPAA</a></div>
-    </div>
-  </footer>
-
-</div><!-- /page-home -->
-
-<!-- ═══════════════════════════════════════════════════════
-     EMR PAGE
-═══════════════════════════════════════════════════════ -->
-<div id="page-emr" class="page sub-page">
-  <div class="back-nav"><button class="back-btn" onclick="goPage('home')">← Back to Home</button></div>
-  <div class="page-hero">
-    <div class="page-hero-inner">
-      <div class="label" style="justify-content:center;margin-bottom:14px">Electronic Medical Records</div>
-      <h1>Clixa <span class="grad-text">EMR</span></h1>
-      <p>Africa's most intelligent cloud-based EMR — built for the speed, complexity, and context of African healthcare.</p>
+<section class="srv-wrap">
+  <div class="srv-inner">
+    <div class="srv-header reveal"><div class="label" style="justify-content:center;margin-bottom:14px">What We Do</div>
+      <h2 class="display">End-to-End Digital Health Solutions</h2>
+      <p class="sub" style="margin:12px auto 0">Everything a modern healthcare organization needs to thrive in the digital era.</p></div>
+    <div class="srv-grid reveal">
+      <a href="emr.html" class="srv-card"><div class="srv-icon">&#127973;</div><div class="srv-title">Clixa EMR</div><div class="srv-desc">AI-first electronic medical records with voice transcription, clinical notes, and multilingual support for African clinicians.</div><span class="srv-link">Explore EMR &rarr;</span></a>
+      <a href="tools.html" class="srv-card"><div class="srv-icon">&#128300;</div><div class="srv-title">Clinical Tools Suite</div><div class="srv-desc">60+ digital clinical calculators for risk scores, drug dosing, diagnostics and patient education &mdash; used by clinicians across Africa.</div><span class="srv-link">Browse Tools &rarr;</span></a>
+      <a href="marketing.html" class="srv-card"><div class="srv-icon">&#128200;</div><div class="srv-title">Healthcare Marketing</div><div class="srv-desc">SEO, social media, brand design, patient acquisition campaigns, and content strategies engineered for healthcare growth.</div><span class="srv-link">Get a Quote &rarr;</span></a>
+      <a href="consultancy.html" class="srv-card"><div class="srv-icon">&#129504;</div><div class="srv-title">Strategic Consultancy</div><div class="srv-desc">Physician-led digital transformation strategy, market entry planning, and investment advisory for healthcare organizations.</div><span class="srv-link">Book Consult &rarr;</span></a>
     </div>
   </div>
-  <div class="emr-main reveal">
-    <div class="emr-badge"><span></span>Coming Soon — Join the Waitlist</div>
-    <h2 class="display">A New Standard in<br><span class="grad-text">Clinical Record-Keeping</span></h2>
-    <p>Clixa EMR is a modern, AI-assisted electronic medical records platform designed from the ground up for African healthcare facilities — from small clinics to large hospital networks.</p>
-    <div class="emr-features reveal">
-      <div class="emr-feat"><div class="emr-feat-icon">🩺</div><div class="emr-feat-title">Intelligent Clinical Notes</div><div class="emr-feat-text">AI-assisted note taking with SOAP template support, ICD-10 coding, and automatic summaries for faster documentation.</div></div>
-      <div class="emr-feat"><div class="emr-feat-icon">💊</div><div class="emr-feat-title">Prescriptions & Drug Safety</div><div class="emr-feat-text">Digital prescriptions with built-in drug interaction checking, allergy alerts, and weight-based dosage guidance.</div></div>
-      <div class="emr-feat"><div class="emr-feat-icon">📊</div><div class="emr-feat-title">Lab & Imaging Integration</div><div class="emr-feat-text">Connect labs and imaging centers directly. Results flow into patient records automatically with clinical trend tracking.</div></div>
-      <div class="emr-feat"><div class="emr-feat-icon">📅</div><div class="emr-feat-title">Smart Appointment System</div><div class="emr-feat-text">Intelligent scheduling with auto-reminders, wait-time prediction, and walk-in queue management built-in.</div></div>
-      <div class="emr-feat"><div class="emr-feat-icon">🔒</div><div class="emr-feat-title">Secure & Compliant</div><div class="emr-feat-text">End-to-end encryption, role-based access control, and full audit trails. Built to meet national and international data standards.</div></div>
-      <div class="emr-feat"><div class="emr-feat-icon">📱</div><div class="emr-feat-title">Mobile-First Design</div><div class="emr-feat-text">Works seamlessly on phones, tablets, and desktops. Access patient records from the ward, clinic, or remotely.</div></div>
+</section>
+
+<section class="tprev-wrap">
+  <div class="tprev-inner">
+    <div class="tprev-header reveal"><div class="label" style="justify-content:center;margin-bottom:14px">Clinical Tools</div>
+      <h2 class="display">Precision Clinical Tools,<br>Built for the Bedside</h2>
+      <p class="sub" style="margin:12px auto 0">Evidence-based calculators that help clinicians make faster, more accurate decisions.</p></div>
+    <div class="tprev-grid reveal">
+      <a href="tools.html" class="tpc"><div class="tpc-icon">&#10084;&#65039;</div><div class="tpc-name">CHADS&#8322;-VASc Score</div><div class="tpc-desc">Stroke risk stratification for atrial fibrillation anticoagulation decisions.</div><button class="tpc-launch">Open Tool &rarr;</button></a>
+      <a href="tools.html" class="tpc"><div class="tpc-icon">&#9878;&#65039;</div><div class="tpc-name">BMI &amp; Obesity Risk</div><div class="tpc-desc">Body mass index with WHO obesity classification and metabolic risk assessment.</div><button class="tpc-launch">Open Tool &rarr;</button></a>
+      <a href="tools.html" class="tpc"><div class="tpc-icon">&#129380;</div><div class="tpc-name">Pregnancy Due Date</div><div class="tpc-desc">EDD calculation with gestational age tracker using Naegele's rule.</div><button class="tpc-launch">Open Tool &rarr;</button></a>
+      <a href="tools.html" class="tpc"><div class="tpc-icon">&#128300;</div><div class="tpc-name">eGFR Calculator</div><div class="tpc-desc">CKD-EPI 2021 kidney function estimation and CKD staging.</div><button class="tpc-launch">Open Tool &rarr;</button></a>
     </div>
-    <div class="emr-demo-box reveal">
-      <h3>Request Demo Access</h3>
-      <p>Clixa EMR is currently in advanced development. Be the first to access our beta program and shape the future of healthcare records in Africa.</p>
-      <div class="emr-form">
-        <div class="field"><label>Full Name</label><input type="text" placeholder="Dr. Jane Smith"/></div>
-        <div class="field"><label>Email Address</label><input type="email" placeholder="doctor@hospital.com"/></div>
-        <div class="field"><label>Organization</label><input type="text" placeholder="Name of your clinic or hospital"/></div>
-        <div class="field"><label>Role</label><select><option>Physician / Doctor</option><option>Hospital Administrator</option><option>Clinic Manager</option><option>Nurse / Clinician</option><option>Health-Tech Entrepreneur</option><option>Other</option></select></div>
-        <div class="field"><label>Number of Providers</label><select><option>1–5 providers</option><option>6–20 providers</option><option>21–50 providers</option><option>50+ providers</option></select></div>
-        <button class="submit-btn" onclick="handleFormSubmit('emr-success')">Request Demo Access →</button>
-        <div id="emr-success" class="form-success" style="margin-top:16px">
-          <div class="form-success-icon">✅</div>
-          <h4>You're on the list!</h4>
-          <p>Thank you for your interest in Clixa EMR. Our team will contact you within 48 hours to schedule your personalized demo.</p>
-        </div>
+    <div style="text-align:center"><a href="tools.html" class="btn btn-grad btn-lg">View All 60+ Tools &rarr;</a></div>
+  </div>
+</section>
+
+<section class="why-wrap">
+  <div class="why-inner">
+    <div class="why-header reveal"><div class="label" style="justify-content:center;margin-bottom:14px">Why It Matters</div>
+      <h2 class="display">Why Digital Health Is Critical</h2>
+      <p class="sub" style="margin:12px auto 0">The global shift to digital healthcare is not a trend &mdash; it's the new standard of care.</p></div>
+    <div class="why-grid reveal">
+      <div class="why-card"><div class="why-icon">&#128200;</div><div class="why-title">Reach More Patients</div><div class="why-text">Digital presence allows healthcare providers to reach 3&ndash;5&times; more patients through search, social media, and online booking without increasing costs proportionally.</div></div>
+      <div class="why-card"><div class="why-icon">&#9889;</div><div class="why-title">Faster Clinical Decisions</div><div class="why-text">Digital clinical tools reduce risk calculation and diagnosis support time by up to 70%, letting clinicians see more patients and reduce errors.</div></div>
+      <div class="why-card"><div class="why-icon">&#127758;</div><div class="why-title">Africa's Digital Health Gap</div><div class="why-text">Sub-Saharan Africa has the largest unmet need for digital health infrastructure. Organizations that digitize now will lead the market for the next decade.</div></div>
+      <div class="why-card"><div class="why-icon">&#129302;</div><div class="why-title">AI-Augmented Care</div><div class="why-text">AI-powered tools improve diagnostic accuracy, reduce misdiagnosis rates, and support clinicians with evidence-based decision support at the point of care.</div></div>
+      <div class="why-card"><div class="why-icon">&#128241;</div><div class="why-title">Patient Empowerment</div><div class="why-text">Digital health tools empower patients to monitor their own health, improving treatment adherence and early detection of conditions.</div></div>
+      <div class="why-card"><div class="why-icon">&#128176;</div><div class="why-title">ROI for Healthcare Orgs</div><div class="why-text">Healthcare organizations that invest in digital strategies see an average 2&ndash;4&times; return through increased patient volume and reduced no-show rates.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="impact-wrap">
+  <div class="impact-inner">
+    <div class="impact-header reveal"><div class="label" style="justify-content:center;margin-bottom:14px">Our Impact</div>
+      <h2 class="display">Numbers That Speak<br>for Themselves</h2></div>
+    <div class="impact-grid reveal">
+      <div class="impact-stat"><div class="is-val">150+</div><div class="is-lbl">Healthcare Clients</div></div>
+      <div class="impact-stat"><div class="is-val">320%</div><div class="is-lbl">Avg. Patient Growth</div></div>
+      <div class="impact-stat"><div class="is-val">2.4M</div><div class="is-lbl">Social Media Reach</div></div>
+      <div class="impact-stat"><div class="is-val">98%</div><div class="is-lbl">Client Retention</div></div>
+    </div>
+    <div class="impact-bars reveal">
+      <div class="ibar-card"><div class="ibar-title">Marketing Performance</div>
+        <div class="ibar-row"><span style="width:120px">SEO Rankings</span><div class="ibar-track"><div class="ibar-fill" style="width:92%"></div></div><span>92%</span></div>
+        <div class="ibar-row"><span style="width:120px">Patient Inquiries</span><div class="ibar-track"><div class="ibar-fill" style="width:87%"></div></div><span>87%</span></div>
+        <div class="ibar-row"><span style="width:120px">Social Engagement</span><div class="ibar-track"><div class="ibar-fill" style="width:79%"></div></div><span>79%</span></div>
+        <div class="ibar-row"><span style="width:120px">Brand Awareness</span><div class="ibar-track"><div class="ibar-fill" style="width:95%"></div></div><span>95%</span></div>
+      </div>
+      <div class="ibar-card"><div class="ibar-title">Digital Health Technology</div>
+        <div class="ibar-row"><span style="width:120px">Platform Uptime</span><div class="ibar-track"><div class="ibar-fill" style="width:99%"></div></div><span>99%</span></div>
+        <div class="ibar-row"><span style="width:120px">User Satisfaction</span><div class="ibar-track"><div class="ibar-fill" style="width:96%"></div></div><span>96%</span></div>
+        <div class="ibar-row"><span style="width:120px">Booking Rate</span><div class="ibar-track"><div class="ibar-fill" style="width:92%"></div></div><span>92%</span></div>
+        <div class="ibar-row"><span style="width:120px">Cost Reduction</span><div class="ibar-track"><div class="ibar-fill" style="width:68%"></div></div><span>68%</span></div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══════════════════════════════════════════════════════
-     TOOLS PAGE
-═══════════════════════════════════════════════════════ -->
-<div id="page-tools" class="page sub-page">
-  <div class="back-nav"><button class="back-btn" onclick="goPage('home')">← Back to Home</button></div>
-  <div class="page-hero">
-    <div class="page-hero-inner">
-      <div class="label" style="justify-content:center;margin-bottom:14px">Clinical Tools Library</div>
-      <h1>Clixa <span class="grad-text">Digital Health Tools</span></h1>
-      <p>60+ intelligent clinical calculators and health trackers — for healthcare professionals and patients.</p>
-      <div style="margin-top:24px">
-        <div class="tools-toggle">
-          <button class="tt-btn active" id="btn-pro" onclick="setType('pro')">🏥 Healthcare Professional</button>
-          <button class="tt-btn" id="btn-user" onclick="setType('user')">👤 Regular User</button>
-        </div>
-      </div>
+<section class="testi-wrap">
+  <div class="testi-inner">
+    <div class="testi-header reveal"><div class="label" style="justify-content:center;margin-bottom:14px">Client Stories</div>
+      <h2 class="display">What Our Clients Say</h2></div>
+    <div class="testi-grid reveal">
+      <div class="tc"><div class="tc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="tc-text">"Clixa Health transformed how we reach patients. Within 3 months, our online patient inquiries increased by over 300%. The team truly understands healthcare."</div><div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#0EA5E9,#14B8A6)">DB</div><div><div class="tc-name">Dr. Bekele Tadesse</div><div class="tc-role">CEO, Grand Bishoftu Hospital</div></div></div></div>
+      <div class="tc"><div class="tc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="tc-text">"The digital health tools Clixa built have been a game-changer for our MCH program. Our nurses use them daily for clinical calculations. Exceptional product."</div><div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#A78BFA,#06B6D4)">SA</div><div><div class="tc-name">Sister Amara Gebre</div><div class="tc-role">Clinical Lead, EtCare MCH</div></div></div></div>
+      <div class="tc"><div class="tc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="tc-text">"Our social following grew from 800 to 18,000 in 8 months. The content Clixa produces is clinically credible and highly engaging. We couldn't have done it without them."</div><div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#14B8A6,#0EA5E9)">FM</div><div><div class="tc-name">Dr. Feven Mulugeta</div><div class="tc-role">Director, Addis Hiwot Hospital</div></div></div></div>
     </div>
   </div>
-  <div class="tools-page-main">
-    <div class="tools-subcat-bar" id="subcat-bar"></div>
-    <div id="tools-list"></div>
+</section>
+
+<section class="pf-wrap">
+  <div class="pf-inner">
+    <div class="reveal"><div class="label" style="justify-content:center;margin-bottom:14px">Our Work</div>
+      <h2 class="display" style="font-size:clamp(26px,3.2vw,46px)">We've Helped Healthcare Leaders<br><span class="grad-text">Build, Grow &amp; Innovate</span></h2>
+      <p style="color:var(--muted);font-size:15px;max-width:520px;margin:14px auto 44px;line-height:1.7;font-weight:300">From hospital rebrands to full digital health platforms &mdash; transforming healthcare across Africa.</p></div>
+    <div class="pf-mosaic reveal">
+      <div><div class="pm-vis" style="background:linear-gradient(135deg,#0a1628,#0d3060)">&#127973;<span>Dream Ortho Spine</span></div><div class="pm-lbl">Website &amp; Patient Platform</div></div>
+      <div><div class="pm-vis" style="background:linear-gradient(135deg,#1a0a2e,#2d1060)">&#127800;<span>EtCare MCH</span></div><div class="pm-lbl">MCH Digital Platform</div></div>
+      <div><div class="pm-vis" style="background:linear-gradient(135deg,#2e1a0a,#4a2a08)">&#128300;<span>BMY Diagnostics</span></div><div class="pm-lbl">Lab Platform &amp; Brand</div></div>
+    </div>
+    <a href="portfolio.html" class="btn btn-grad btn-lg">View Full Portfolio &rarr;</a>
   </div>
-</div>
+</section>
 
-<!-- ═══════════════════════════════════════════════════════
-     MARKETING PAGE
-═══════════════════════════════════════════════════════ -->
-<div id="page-marketing" class="page sub-page">
-  <div class="back-nav"><button class="back-btn" onclick="goPage('home')">← Back to Home</button></div>
-  <div class="page-hero">
-    <div class="page-hero-inner">
-      <div class="label" style="justify-content:center;margin-bottom:14px">Healthcare Marketing</div>
-      <h1>Healthcare <span class="grad-text">Marketing Solutions</span></h1>
-      <p>Doctor-informed digital marketing that brings real patients to healthcare organizations — built on clinical credibility.</p>
+<section class="cta-strip">
+  <h2 class="display">Ready to Transform<br><span class="grad-text">Your Healthcare Brand?</span></h2>
+  <p>Let's build something remarkable together. Book a free 30-minute strategy call with our team today.</p>
+  <div class="cta-btns"><a href="consultancy.html" class="btn btn-grad btn-lg">Book Free Consultation &rarr;</a><a href="marketing.html" class="btn btn-outline btn-lg">Request a Quote</a></div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+        <div class="logo-mark" style="width:30px;height:30px;border-radius:8px"><svg viewBox="0 0 20 20" fill="none" style="width:16px;height:16px"><rect x="8" y="2" width="4" height="16" rx="2" fill="rgba(255,255,255,.95)"/><rect x="2" y="8" width="16" height="4" rx="2" fill="rgba(255,255,255,.95)"/></svg></div>
+        <span style="font-family:var(--fd);font-size:17px;font-weight:800">Clixa Health</span>
+      </div>
+      <p>Africa's leading digital health innovation company &mdash; founded by doctors, built by technology experts.</p>
+      <div class="footer-socials"><div class="social-btn">in</div><div class="social-btn">X</div><div class="social-btn">&#9654;</div><div class="social-btn">@</div></div>
     </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="emr.html">Clixa EMR</a></li><li><a href="tools.html">Digital Health Tools</a></li><li><a href="marketing.html">Healthcare Marketing</a></li><li><a href="consultancy.html">Strategic Consultancy</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="portfolio.html">Our Portfolio</a></li><li><a href="#">About Us</a></li><li><a href="#">Blog &amp; Insights</a></li><li><a href="#">Careers</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:hello@clixahealth.com">hello@clixahealth.com</a></li><li><a href="#">Addis Ababa, Ethiopia</a></li><li><a href="consultancy.html">Book a Consultation</a></li><li><a href="marketing.html">Request a Quote</a></li></ul></div>
   </div>
-  <div class="marketing-main">
-    <div class="mkt-overview reveal">
-      <div>
-        <div class="label" style="margin-bottom:14px">What We Offer</div>
-        <h2 class="display">Marketing Built by Healthcare Experts,<br><span class="grad-text">Not Just Marketers</span></h2>
-        <p>Most healthcare marketing fails because it's created by generic agencies that don't understand clinical audiences, medical compliance, or patient psychology. Clixa Health does it differently — our marketing team includes physicians, clinical writers, and digital strategists who live and breathe healthcare.</p>
-        <p>Every campaign we run is medically accurate, ethically sound, and strategically targeted to reach both patients and healthcare professionals.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
-          <button class="btn btn-grad" onclick="document.getElementById('mkt-form-anchor').scrollIntoView({behavior:'smooth'})">Get a Free Quote →</button>
-        </div>
-      </div>
-      <div class="mkt-services">
-        <div class="mkt-svc"><div class="mkt-svc-icon">🔍</div><div><div class="mkt-svc-title">Medical SEO</div><div class="mkt-svc-text">Rank on the first page for key health searches in your region. Evidence-based keyword strategies for healthcare.</div></div></div>
-        <div class="mkt-svc"><div class="mkt-svc-icon">📱</div><div><div class="mkt-svc-title">Social Media Management</div><div class="mkt-svc-text">Clinically credible health content that builds trust, educates patients, and drives appointment bookings.</div></div></div>
-        <div class="mkt-svc"><div class="mkt-svc-icon">🎨</div><div><div class="mkt-svc-title">Brand Strategy & Design</div><div class="mkt-svc-text">Full visual identity — logo, brand guidelines, signage, and communication materials for your healthcare brand.</div></div></div>
-        <div class="mkt-svc"><div class="mkt-svc-icon">🎯</div><div><div class="mkt-svc-title">Paid Digital Advertising</div><div class="mkt-svc-text">Google Ads and social media campaigns optimized for patient acquisition and appointment scheduling.</div></div></div>
-        <div class="mkt-svc"><div class="mkt-svc-icon">📝</div><div><div class="mkt-svc-title">Healthcare Content Creation</div><div class="mkt-svc-text">Doctor-reviewed blog posts, health education videos, infographics, and patient newsletters.</div></div></div>
-        <div class="mkt-svc"><div class="mkt-svc-icon">⭐</div><div><div class="mkt-svc-title">Reputation Management</div><div class="mkt-svc-text">Build and protect your online reputation through review strategies and professional response management.</div></div></div>
-      </div>
-    </div>
-
-    <!-- QUOTATION FORM -->
-    <div id="mkt-form-anchor" class="mkt-form-section reveal">
-      <h3>Request a Marketing Quotation</h3>
-      <p>Tell us about your healthcare business and marketing goals. We'll review your submission and send you a custom proposal within 2 business days.</p>
-      <div class="form-row">
-        <div class="field"><label>Contact Person</label><input type="text" placeholder="Full name"/></div>
-        <div class="field"><label>Job Title</label><input type="text" placeholder="e.g. CEO, Marketing Manager"/></div>
-      </div>
-      <div class="form-row">
-        <div class="field"><label>Email Address</label><input type="email" placeholder="you@organization.com"/></div>
-        <div class="field"><label>Phone Number</label><input type="tel" placeholder="+251 91 XXX XXXX"/></div>
-      </div>
-      <div class="form-row">
-        <div class="field"><label>Organization Name</label><input type="text" placeholder="Name of your hospital, clinic, or company"/></div>
-        <div class="field"><label>Type of Organization</label><select><option>Private Hospital</option><option>Government Hospital</option><option>Specialty Clinic</option><option>Diagnostic Laboratory</option><option>Pharmacy / Drug Store</option><option>Health-Tech Company</option><option>Telehealth Provider</option><option>Other</option></select></div>
-      </div>
-      <div class="form-row">
-        <div class="field"><label>Location / City</label><input type="text" placeholder="e.g. Addis Ababa, Nairobi"/></div>
-        <div class="field"><label>Number of Locations</label><select><option>1 location</option><option>2–5 locations</option><option>6–15 locations</option><option>15+ locations / chain</option></select></div>
-      </div>
-      <div class="field"><label>Services You're Interested In (select all that apply)</label><select multiple style="height:120px"><option>Medical SEO</option><option>Social Media Management</option><option>Brand Identity & Design</option><option>Paid Digital Advertising</option><option>Healthcare Content Creation</option><option>Reputation Management</option><option>Full Marketing Package</option><option>Website Design & Development</option></select></div>
-      <div class="form-row">
-        <div class="field"><label>Monthly Marketing Budget</label><select><option>Under $500/month</option><option>$500 – $1,500/month</option><option>$1,500 – $3,000/month</option><option>$3,000 – $7,000/month</option><option>$7,000+/month</option><option>One-time project</option></select></div>
-        <div class="field"><label>Target Patient Demographics</label><input type="text" placeholder="e.g. Adults 25–55, mothers, seniors"/></div>
-      </div>
-      <div class="field"><label>Current Online Presence</label><select><option>No website, no social media</option><option>Website only, no social media</option><option>Social media only, no website</option><option>Both website and social media</option><option>Full digital presence — needs optimization</option></select></div>
-      <div class="field"><label>Main Marketing Goal</label><select><option>Increase new patient volume</option><option>Build brand awareness</option><option>Launch a new service / clinic</option><option>Compete against specific competitors</option><option>Improve online reputation</option><option>Re-engage existing patients</option></select></div>
-      <div class="field"><label>Describe Your Business & Any Specific Requests</label><textarea placeholder="Tell us about your healthcare business, your current challenges, and what results you're hoping to achieve..."></textarea></div>
-      <div class="field"><label>How Did You Hear About Clixa Health?</label><select><option>Google Search</option><option>Social Media</option><option>Referral from colleague</option><option>Healthcare conference/event</option><option>Other</option></select></div>
-      <button class="submit-btn" onclick="handleFormSubmit('mkt-success')">Request Quotation →</button>
-      <div id="mkt-success" class="form-success">
-        <div class="form-success-icon">🎉</div>
-        <h4>Quote Request Received!</h4>
-        <p>Thank you for choosing Clixa Health. Our marketing team will review your submission and send you a tailored proposal within 2 business days. We look forward to growing your practice!</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════
-     CONSULTANCY PAGE
-═══════════════════════════════════════════════════════ -->
-<div id="page-consult" class="page sub-page">
-  <div class="back-nav"><button class="back-btn" onclick="goPage('home')">← Back to Home</button></div>
-  <div class="page-hero">
-    <div class="page-hero-inner">
-      <div class="label" style="justify-content:center;margin-bottom:14px">Strategic Consultancy</div>
-      <h1>Healthcare <span class="grad-text">Strategic Consultancy</span></h1>
-      <p>Expert healthcare strategy from physician-consultants and business strategists with deep clinical and market knowledge.</p>
-    </div>
-  </div>
-  <div class="consult-main">
-    <div class="consult-overview reveal">
-      <div>
-        <div class="label" style="margin-bottom:14px">Our Consultancy Services</div>
-        <h2 class="display">Strategy From People<br>Who Know <span class="grad-text">Healthcare</span></h2>
-        <p>We're not generic consultants who read about healthcare — we're physicians, health economists, and digital strategists who have worked inside healthcare organizations. Our consultancy is grounded in clinical reality and powered by data-driven strategy.</p>
-        <p style="margin-top:14px">Whether you're launching a new clinic, digitizing a hospital, or entering a new market — we'll build the roadmap and walk it with you.</p>
-      </div>
-      <div class="consult-areas">
-        <div class="consult-area"><div class="ca-dot"></div><div><div class="ca-title">Digital Transformation Strategy</div><div class="ca-sub">End-to-end digital roadmaps for hospitals and clinic networks</div></div></div>
-        <div class="consult-area"><div class="ca-dot"></div><div><div class="ca-title">Health-Tech Market Entry</div><div class="ca-sub">Regulatory navigation, market sizing, and go-to-market planning</div></div></div>
-        <div class="consult-area"><div class="ca-dot"></div><div><div class="ca-title">Healthcare Business Growth</div><div class="ca-sub">Revenue cycle optimization and patient volume growth strategies</div></div></div>
-        <div class="consult-area"><div class="ca-dot"></div><div><div class="ca-title">Investment & Fundraising Advisory</div><div class="ca-sub">Pitch preparation, valuation guidance, and investor introductions</div></div></div>
-        <div class="consult-area"><div class="ca-dot"></div><div><div class="ca-title">Clinical Operations Optimization</div><div class="ca-sub">Workflow analysis, process redesign, and efficiency improvements</div></div></div>
-        <div class="consult-area"><div class="ca-dot"></div><div><div class="ca-title">Regulatory & Compliance Guidance</div><div class="ca-sub">HIPAA, FDA, CE, and local regulatory compliance frameworks</div></div></div>
-      </div>
-    </div>
-
-    <div class="consult-forms reveal">
-      <!-- CONTACT FORM -->
-      <div class="consult-form-card">
-        <h3>Book a Consultation</h3>
-        <p>Fill in your details and one of our physician-consultants will reach out within 24 hours to schedule your session.</p>
-        <div class="field"><label>Full Name</label><input type="text" placeholder="Your name"/></div>
-        <div class="field"><label>Email Address</label><input type="email" placeholder="you@organization.com"/></div>
-        <div class="field"><label>Phone</label><input type="tel" placeholder="+251 9X XXX XXXX"/></div>
-        <div class="field"><label>Organization</label><input type="text" placeholder="Hospital, clinic, or company name"/></div>
-        <div class="field"><label>Consultation Focus</label><select><option>Digital Transformation</option><option>Market Entry Strategy</option><option>Business Growth Planning</option><option>Investment Advisory</option><option>Clinical Operations</option><option>Regulatory Compliance</option><option>General Healthcare Strategy</option></select></div>
-        <div class="field"><label>Preferred Meeting Format</label><select><option>Video call (Zoom / Teams)</option><option>In-person (Addis Ababa)</option><option>Phone call</option></select></div>
-        <div class="field"><label>Briefly describe your challenge or goal</label><textarea placeholder="What are you looking to achieve? What's your main challenge?" style="min-height:80px"></textarea></div>
-        <button class="submit-btn" onclick="handleFormSubmit('consult-success')">Book My Consultation →</button>
-        <div id="consult-success" class="form-success">
-          <div class="form-success-icon">📅</div>
-          <h4>Consultation Request Sent!</h4>
-          <p>Our team will contact you within 24 hours to confirm your consultation slot.</p>
-        </div>
-      </div>
-
-      <!-- NEWSLETTER FORM -->
-      <div class="consult-form-card">
-        <h3>Healthcare Insights Newsletter</h3>
-        <p>Get weekly digital health strategy insights, clinical news, and market intelligence from our team of physician-consultants — delivered to your inbox every Thursday.</p>
-        <div style="margin-bottom:20px">
-          <div style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:rgba(14,165,233,.04);border:1px solid var(--border);border-radius:10px;margin-bottom:10px">
-            <span style="font-size:18px">📊</span><div><div style="font-size:13px;font-weight:600;font-family:var(--fd)">Weekly Market Intelligence</div><div style="font-size:11.5px;color:var(--muted)">Africa healthcare market trends & opportunities</div></div>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:rgba(14,165,233,.04);border:1px solid var(--border);border-radius:10px;margin-bottom:10px">
-            <span style="font-size:18px">🩺</span><div><div style="font-size:13px;font-weight:600;font-family:var(--fd)">Clinical Strategy Articles</div><div style="font-size:11.5px;color:var(--muted)">Deep-dives from our physician-consultant team</div></div>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:rgba(14,165,233,.04);border:1px solid var(--border);border-radius:10px">
-            <span style="font-size:18px">💡</span><div><div style="font-size:13px;font-weight:600;font-family:var(--fd)">Digital Health Innovations</div><div style="font-size:11.5px;color:var(--muted)">Latest tools, tech, and innovations in healthtech</div></div>
-          </div>
-        </div>
-        <div class="field"><label>Full Name</label><input type="text" placeholder="Dr. Jane Smith"/></div>
-        <div class="field"><label>Email Address</label><input type="email" placeholder="you@hospital.com"/></div>
-        <div class="field"><label>Your Role</label><select><option>Physician / Doctor</option><option>Hospital Administrator</option><option>Healthcare Executive</option><option>Health-Tech Entrepreneur</option><option>Nurse / Allied Health</option><option>Investor / Funder</option><option>Other</option></select></div>
-        <div class="field"><label>Topics of Interest</label><select multiple style="height:90px"><option selected>Digital Health Strategy</option><option>Healthcare Marketing</option><option>AI in Healthcare</option><option>African Health Markets</option><option>Clinical Technology</option><option>Healthcare Finance & Investment</option></select></div>
-        <button class="submit-btn" style="background:linear-gradient(135deg,#14B8A6,#06B6D4)" onclick="handleFormSubmit('newsletter-success')">Subscribe to Newsletter →</button>
-        <div id="newsletter-success" class="form-success">
-          <div class="form-success-icon">✉️</div>
-          <h4>Welcome to the Insider Community!</h4>
-          <p>You're now subscribed to the Clixa Health Healthcare Insights newsletter. Expect your first issue next Thursday!</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════
-     PORTFOLIO PAGE
-═══════════════════════════════════════════════════════ -->
-<div id="page-portfolio" class="page sub-page">
-  <div class="back-nav"><button class="back-btn" onclick="goPage('home')">← Back to Home</button></div>
-  <div class="page-hero">
-    <div class="page-hero-inner">
-      <div class="label" style="justify-content:center;margin-bottom:14px">Our Work</div>
-      <h1>Client <span class="grad-text">Portfolio</span></h1>
-      <p>Healthcare organizations we've helped build, grow, and transform through digital innovation.</p>
-    </div>
-  </div>
-  <div class="portfolio-page-main">
-    <div class="pf-filter-row">
-      <button class="pf-filter active" onclick="pfFilter('all',this)">All Clients</button>
-      <button class="pf-filter" onclick="pfFilter('ortho',this)">Dream Ortho Spine</button>
-      <button class="pf-filter" onclick="pfFilter('etcare',this)">EtCare MCH</button>
-      <button class="pf-filter" onclick="pfFilter('bmy',this)">BMY Diagnostics</button>
-      <button class="pf-filter" onclick="pfFilter('grandb',this)">Grand Bishoftu Hospital</button>
-      <button class="pf-filter" onclick="pfFilter('addish',this)">Addis Hiwot Hospital</button>
-    </div>
-    <div id="pf-content"></div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════
-     TOOL MODAL
-═══════════════════════════════════════════════════════ -->
-<div class="tool-modal-overlay" id="tool-overlay" onclick="closeModal(event)">
-  <div class="tool-modal" id="tool-modal">
-    <div class="modal-header">
-      <div><div class="modal-title" id="m-title"></div><div class="modal-sub" id="m-sub"></div></div>
-      <div class="modal-close" onclick="closeToolModal()">✕</div>
-    </div>
-    <div class="modal-body" id="m-body"></div>
-    <div class="modal-footer">
-      <button class="modal-footer-btn" onclick="copyResult()">📋 Copy Results</button>
-      <button class="modal-footer-btn">📄 Export PDF</button>
-      <button class="modal-footer-btn">👨‍⚕️ Share with Doctor</button>
-    </div>
-  </div>
-</div>
-
-<script>
-/* ════════════════════════════════════════
-   ROUTING
-════════════════════════════════════════ */
-function goPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  const el=document.getElementById('page-'+id);
-  if(el){el.classList.add('active');window.scrollTo(0,0);}
-  if(id==='tools'){renderTools();}
-  if(id==='portfolio'){renderPortfolio();}
-  setTimeout(initReveal,80);
-}
-function toggleMob(){document.getElementById('mob').classList.toggle('open');}
-function closeMob(){document.getElementById('mob').classList.remove('open');}
-
-/* NAV scroll */
-window.addEventListener('scroll',()=>{
-  const n=document.getElementById('nav');
-  n.style.background=window.scrollY>40?'rgba(3,9,26,.98)':'rgba(3,9,26,.88)';
-  n.style.boxShadow=window.scrollY>40?'0 1px 32px rgba(0,0,0,.5)':'none';
-});
-
-/* REVEAL */
-function initReveal(){
-  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.07,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.page.active .reveal').forEach(el=>{if(!el.classList.contains('in'))obs.observe(el);});
-}
-setTimeout(initReveal,100);
-
-/* FORM SUBMIT */
-function handleFormSubmit(successId){
-  const el=document.getElementById(successId);
-  if(el){el.style.display='block';el.scrollIntoView({behavior:'smooth',block:'nearest'});}
-}
-
-/* ════════════════════════════════════════
-   TOOLS DATA
-════════════════════════════════════════ */
-const TOOLS={
-  pro:{
-    'General Medicine':[
-      {id:'bmi',name:'BMI Calculator',icon:'⚖️',desc:'Body mass index with WHO categories',calc:true},
-      {id:'ibw',name:'Ideal Body Weight',icon:'🎯',desc:'Devine/Robinson IBW formula',calc:true},
-      {id:'bsa',name:'Body Surface Area',icon:'📐',desc:'Mosteller BSA calculation',calc:true},
-      {id:'bmr',name:'Basal Metabolic Rate',icon:'🔥',desc:'Mifflin-St Jeor BMR equation',calc:true},
-      {id:'tdee',name:'Calorie Requirement',icon:'🍽️',desc:'Total daily energy expenditure',calc:true},
-      {id:'fluid',name:'Fluid Requirement',icon:'💧',desc:'Holliday-Segar maintenance fluids',calc:true},
-      {id:'dose',name:'Drug Dose per kg',icon:'💊',desc:'Weight-based medication dosing',calc:true},
-      {id:'crcl',name:'Creatinine Clearance',icon:'🧪',desc:'Cockcroft-Gault equation',calc:true},
-      {id:'egfr',name:'eGFR Calculator',icon:'🔬',desc:'CKD-EPI 2021 kidney function',calc:true},
-      {id:'ag',name:'Anion Gap',icon:'⚗️',desc:'Metabolic acidosis assessment',calc:true},
-      {id:'osm',name:'Serum Osmolality',icon:'🧫',desc:'Calculated serum osmolarity',calc:true},
-      {id:'map',name:'Mean Arterial Pressure',icon:'📊',desc:'MAP from systolic & diastolic',calc:true},
-    ],
-    'Cardiology':[
-      {id:'ascvd',name:'ASCVD Risk Score',icon:'❤️',desc:'10-year CVD risk (ACC/AHA)',calc:true},
-      {id:'bpclass',name:'BP Classification',icon:'🩺',desc:'ACC/AHA 2017 BP categories',calc:true},
-      {id:'hrzone',name:'Heart Rate Zones',icon:'⚡',desc:'Training HR zones by age',calc:true},
-      {id:'qtc',name:'QTc Calculator',icon:'📉',desc:'Corrected QT interval',calc:false,premium:true},
-      {id:'chadsvasc',name:'CHA₂DS₂-VASc Score',icon:'🫀',desc:'AF stroke risk scoring',calc:false,premium:true},
-      {id:'framingham',name:'Framingham Risk Score',icon:'📈',desc:'Classic 10-year CVD risk',calc:false,premium:true},
-    ],
-    'Pediatrics':[
-      {id:'peddose',name:'Pediatric Dosage',icon:'👶',desc:'Weight-based dosing for children',calc:true},
-      {id:'apgar',name:'APGAR Score',icon:'🍼',desc:'Newborn condition at birth',calc:true},
-      {id:'pedgrowth',name:'Pediatric Growth Percentile',icon:'📏',desc:'CDC/WHO growth charts',calc:false,premium:true},
-      {id:'pedbmi',name:'Pediatric BMI',icon:'📊',desc:'Age/sex-adjusted BMI',calc:false,premium:true},
-      {id:'pedfluid',name:'Pediatric Fluid Requirement',icon:'💧',desc:'Holliday-Segar for children',calc:true},
-      {id:'bili',name:'Neonatal Bilirubin Risk',icon:'🌡️',desc:'Phototherapy threshold',calc:false,premium:true},
-    ],
-    'Obstetrics & Gynecology':[
-      {id:'edd',name:'Estimated Due Date',icon:'🤰',desc:"Naegele's rule EDD",calc:true},
-      {id:'ovul',name:'Ovulation Calculator',icon:'🌸',desc:'Fertile window prediction',calc:true},
-      {id:'gesta',name:'Gestational Age',icon:'📅',desc:'GA from LMP or ultrasound',calc:false,premium:true},
-      {id:'fundal',name:'Fundal Height Estimator',icon:'📐',desc:'Expected fundal height',calc:false,premium:true},
-      {id:'pgweight',name:'Pregnancy Weight Gain',icon:'⚖️',desc:'IOM gestational weight gain',calc:false,premium:true},
-    ],
-    'Endocrinology':[
-      {id:'diabrisk',name:'Diabetes Risk Calculator',icon:'🩸',desc:'ADA Type 2 risk assessment',calc:true},
-      {id:'homa',name:'HOMA-IR Calculator',icon:'🔬',desc:'Insulin resistance index',calc:true},
-      {id:'hba1c',name:'HbA1c Estimator',icon:'🧪',desc:'eAG from HbA1c value',calc:true},
-      {id:'insulin',name:'Insulin Dose Calculator',icon:'💉',desc:'Basal/bolus dose estimation',calc:false,premium:true},
-      {id:'thyroid',name:'Thyroid Assessment',icon:'🦋',desc:'Thyroid function tool',calc:false,premium:true},
-    ],
-    'Emergency Medicine':[
-      {id:'gcs',name:'Glasgow Coma Scale',icon:'🧠',desc:'Neurological status assessment',calc:true},
-      {id:'shock',name:'Shock Index',icon:'⚡',desc:'HR/SBP haemodynamic ratio',calc:true},
-      {id:'burn',name:'Burn Surface Area',icon:'🔥',desc:'TBSA Rule of Nines',calc:true},
-      {id:'sepsis',name:'Sepsis Risk Score (qSOFA)',icon:'🦠',desc:'Sepsis screening criteria',calc:false,premium:true},
-      {id:'trauma',name:'Revised Trauma Score',icon:'🚑',desc:'Trauma severity scoring',calc:false,premium:true},
-    ],
-    'Critical Care':[
-      {id:'pao2',name:'PaO₂/FiO₂ Ratio',icon:'🫁',desc:'Berlin ARDS classification',calc:true},
-      {id:'apache',name:'APACHE II Score',icon:'🏥',desc:'ICU mortality prediction',calc:false,premium:true},
-      {id:'sofa',name:'SOFA Score',icon:'📊',desc:'Sequential organ failure',calc:false,premium:true},
-    ],
-    'Nutrition':[
-      {id:'water',name:'Water Intake Calculator',icon:'💧',desc:'Daily hydration requirements',calc:true},
-      {id:'protein',name:'Protein Intake Calculator',icon:'🥩',desc:'Daily protein requirements',calc:true},
-      {id:'malnut',name:'Malnutrition Risk Score',icon:'⚠️',desc:'MUST malnutrition screening',calc:false,premium:true},
-    ],
-  },
-  user:{
-    'General Health':[
-      {id:'bmi',name:'BMI Calculator',icon:'⚖️',desc:'Find your BMI and healthy weight range',calc:true},
-      {id:'bodyfat',name:'Body Fat Estimator',icon:'📊',desc:'Estimate your body fat percentage',calc:true},
-      {id:'idealwt',name:'Ideal Weight Calculator',icon:'🎯',desc:'Your healthy weight for your height',calc:true},
-      {id:'dailycal',name:'Daily Calorie Needs',icon:'🍽️',desc:'How many calories do you need per day?',calc:true},
-      {id:'water',name:'Water Intake Calculator',icon:'💧',desc:'Daily hydration goal by weight',calc:true},
-      {id:'sleep',name:'Sleep Requirement',icon:'😴',desc:'How much sleep do you really need?',calc:true},
-    ],
-    "Women's Health":[
-      {id:'menstcycle',name:'Menstrual Cycle Tracker',icon:'🌙',desc:'Track your cycle and predict your next period',calc:true},
-      {id:'ovuluser',name:'Ovulation Predictor',icon:'🌸',desc:'Find your most fertile days',calc:true},
-      {id:'fertwin',name:'Fertility Window',icon:'💐',desc:'Calculate your conception window',calc:false,premium:true},
-      {id:'menopause',name:'Menopause Symptom Tracker',icon:'🌺',desc:'Track and understand menopause symptoms',calc:false,premium:true},
-    ],
-    'Pregnancy':[
-      {id:'edduser',name:'Pregnancy Due Date',icon:'🤰',desc:'When is your baby due?',calc:true},
-      {id:'kickuser',name:'Kick Counter',icon:'👣',desc:"Track your baby's movements",calc:false,premium:true},
-      {id:'pgwtuser',name:'Pregnancy Weight Tracker',icon:'⚖️',desc:'Monitor healthy weight gain in pregnancy',calc:false,premium:true},
-    ],
-    'Heart Health':[
-      {id:'bptrack',name:'Blood Pressure Tracker',icon:'🩺',desc:'Log and understand your BP readings',calc:true},
-      {id:'hrzoneuser',name:'Heart Rate Zone Calculator',icon:'⚡',desc:'Optimal training heart rate zones',calc:true},
-      {id:'cholest',name:'Cholesterol Risk Estimator',icon:'🔬',desc:'Understand your cholesterol levels',calc:false,premium:true},
-    ],
-    'Diabetes & Metabolism':[
-      {id:'diabriskuser',name:'Diabetes Risk Check',icon:'🩸',desc:'Are you at risk for Type 2 diabetes?',calc:true},
-      {id:'hba1cuser',name:'HbA1c Estimator',icon:'🧪',desc:'What does your HbA1c mean?',calc:true},
-      {id:'bstrack',name:'Blood Sugar Tracker',icon:'📈',desc:'Log and monitor your glucose',calc:false,premium:true},
-    ],
-    'Fitness & Nutrition':[
-      {id:'calfit',name:'Daily Calorie Calculator',icon:'🍎',desc:'Calories for your weight goal',calc:true},
-      {id:'macrouser',name:'Macro Calculator',icon:'🥗',desc:'Your protein, carb, and fat targets',calc:true},
-      {id:'calburn',name:'Workout Calorie Burn',icon:'🏃',desc:'Estimate calories burned in exercise',calc:true},
-      {id:'proteinuser',name:'Protein Intake Calculator',icon:'🥩',desc:'How much protein do you need?',calc:true},
-      {id:'hydrate',name:'Hydration Calculator',icon:'💧',desc:'Stay properly hydrated daily',calc:true},
-    ],
-    'Preventive Health':[
-      {id:'smokerisk',name:'Smoking Risk Calculator',icon:'🚭',desc:'Health impact of smoking',calc:false,premium:true},
-      {id:'lifeexp',name:'Life Expectancy Estimator',icon:'⏳',desc:'Lifestyle-based longevity estimation',calc:false,premium:true},
-      {id:'longevity',name:'Longevity Score',icon:'💚',desc:'Score your lifestyle for long-term health',calc:false,premium:true},
-    ],
-  }
-};
-
-/* ════════════════════════════════════════
-   CALCULATORS
-════════════════════════════════════════ */
-const CALCS={
-  bmi:{sub:'Body Mass Index — WHO Clinical Categories',
-    html:`<div class="field"><label>Weight</label><input id="c-w" type="number" placeholder="70"/></div><div class="field"><label>Unit</label><select id="c-wu"><option value="kg">kg</option><option value="lb">lb</option></select></div><div class="field"><label>Height</label><input id="c-h" type="number" placeholder="170"/></div><div class="field"><label>Unit</label><select id="c-hu"><option value="cm">cm</option><option value="in">inches</option></select></div>`,
-    fn:()=>{let w=+($('c-w').value),h=+($('c-h').value);if(!w||!h)return null;if($('c-wu').value==='lb')w*=.4536;if($('c-hu').value==='in')h*=2.54;const b=w/((h/100)**2);const[cat,col]=b<18.5?['Underweight','#38BDF8']:b<25?['Normal Weight','#2DD4BF']:b<30?['Overweight','#F59E0B']:b<35?['Obese Class I','#F97316']:['Obese Class II/III','#EF4444'];return{v:b.toFixed(1),u:`kg/m² — ${cat}`,col,i:`BMI ${b.toFixed(1)}: <strong>${cat}</strong>. ${b<18.5?'Consider nutritional assessment.':b<25?'Healthy range. Maintain with balanced diet and exercise.':b<30?'Overweight range. Lifestyle modifications recommended.':b<35?'Class I Obesity. Structured weight management indicated.':'Significant obesity. Multidisciplinary management required.'}`,note:'BMI = weight(kg) / height²(m). Screening tool only — muscle mass and ethnicity affect interpretation.'};}},
-  egfr:{sub:'CKD-EPI 2021 — Kidney Function Staging',
-    html:`<div class="field"><label>Serum Creatinine (mg/dL)</label><input id="c-cr" type="number" placeholder="1.0" step="0.1"/></div><div class="field"><label>Age (years)</label><input id="c-age" type="number" placeholder="45"/></div><div class="field"><label>Sex</label><select id="c-sex"><option value="male">Male</option><option value="female">Female</option></select></div>`,
-    fn:()=>{const cr=+($('c-cr').value),age=+($('c-age').value),sex=$('c-sex').value;if(!cr||!age)return null;const k=sex==='female'?.7:.9,a=sex==='female'?-.241:-.302,sf=sex==='female'?1.012:1,r=cr/k;const e=142*(Math.min(r,1)**a)*(Math.max(r,1)**-1.2)*(.9938**age)*sf;const[st,col]=e>=90?['G1 — Normal','#2DD4BF']:e>=60?['G2 — Mildly Decreased','#38BDF8']:e>=45?['G3a','#F59E0B']:e>=30?['G3b','#F97316']:e>=15?['G4 — Severe','#EF4444']:['G5 — Kidney Failure','#EF4444'];return{v:Math.round(e),u:`mL/min/1.73m² — ${st}`,col,i:`eGFR ${Math.round(e)}: <strong>${st}</strong>. ${e>=60?'Monitor annually with urine albumin.':e>=30?'Nephrology referral recommended. Dose-adjust renally-cleared drugs.':'Kidney failure — evaluate renal replacement therapy.'}`,note:'2021 CKD-EPI creatinine equation. Interpret alongside urine albumin-to-creatinine ratio.'};}},
-  ascvd:{sub:'ACC/AHA Pooled Cohort — 10-Year CVD Risk',
-    html:`<div class="field"><label>Age (40–79)</label><input id="c-a2" type="number" placeholder="55" min="40" max="79"/></div><div class="field"><label>Total Cholesterol (mg/dL)</label><input id="c-tc" type="number" placeholder="200"/></div><div class="field"><label>HDL Cholesterol (mg/dL)</label><input id="c-hdl" type="number" placeholder="50"/></div><div class="field"><label>Systolic BP (mmHg)</label><input id="c-sbp" type="number" placeholder="130"/></div><div class="field"><label>Diabetes</label><select id="c-dm"><option value="0">No</option><option value="1">Yes</option></select></div><div class="field"><label>Smoking</label><select id="c-sm"><option value="0">Non-smoker</option><option value="1">Current Smoker</option></select></div>`,
-    fn:()=>{const age=+($('c-a2').value),tc=+($('c-tc').value),hdl=+($('c-hdl').value),sbp=+($('c-sbp').value),dm=+($('c-dm').value),sm=+($('c-sm').value);if(!age||!tc||!hdl||!sbp)return null;const s=12.344*Math.log(age)+11.853*Math.log(tc)-2.664*Math.log(hdl)+1.764*Math.log(sbp)+7.837*sm+.658*dm;const r=Math.max(0,Math.min(100,(1-.9144**Math.exp(s-61.18))*100));const[cat,col]=r<5?['Low Risk','#2DD4BF']:r<7.5?['Borderline','#38BDF8']:r<20?['Intermediate','#F59E0B']:['High Risk','#EF4444'];return{v:r.toFixed(1)+'%',u:`10-Year ASCVD — ${cat}`,col,i:`<strong>${r.toFixed(1)}% 10-year ASCVD risk (${cat})</strong>. ${r<5?'Statin generally not indicated. Lifestyle optimization recommended.':r<7.5?'Evaluate risk-enhancing factors. Discuss statin with physician.':r<20?'Moderate-intensity statin therapy recommended (ACC/AHA).':'High-intensity statin indicated. Aggressive risk factor modification required.'}`,note:'ACC/AHA Pooled Cohort Equations. Valid for ages 40–79 without pre-existing CVD.'};}},
-  gcs:{sub:'Glasgow Coma Scale — Neurological Assessment',
-    html:`<div class="field"><label>Eye Opening</label><select id="c-eye"><option value="4">4 — Spontaneous</option><option value="3">3 — To voice</option><option value="2">2 — To pain</option><option value="1">1 — None</option></select></div><div class="field"><label>Verbal Response</label><select id="c-ver"><option value="5">5 — Oriented</option><option value="4">4 — Confused</option><option value="3">3 — Inappropriate words</option><option value="2">2 — Sounds</option><option value="1">1 — None</option></select></div><div class="field"><label>Motor Response</label><select id="c-mot"><option value="6">6 — Obeys commands</option><option value="5">5 — Localises pain</option><option value="4">4 — Withdraws</option><option value="3">3 — Flexion</option><option value="2">2 — Extension</option><option value="1">1 — None</option></select></div>`,
-    fn:()=>{const e=+($('c-eye').value),v=+($('c-ver').value),m=+($('c-mot').value),s=e+v+m;const[sev,col]=s>=13?['Mild TBI','#2DD4BF']:s>=9?['Moderate TBI','#F59E0B']:['Severe TBI','#EF4444'];return{v:s,u:`/ 15 — ${sev}`,col,i:`<strong>GCS ${s}/15 (${sev})</strong>. ${s>=13?'Alert with minor impairment. Monitor for deterioration.':s>=9?'CT imaging required. Neurosurgical consultation and ICU monitoring.':'⚠️ Intubation threshold met (GCS ≤8). Immediate neurosurgical consultation required.'}`,note:`E(${e}) + V(${v}) + M(${m}) = ${s}/15. GCS ≤8 = intubate.`};}},
-  edd:{sub:"Naegele's Rule — Pregnancy Dating",
-    html:`<div class="field"><label>First Day of Last Menstrual Period</label><input id="c-lmp" type="date"/></div><div class="field"><label>Average Cycle Length (days)</label><input id="c-cyc" type="number" placeholder="28" min="21" max="45"/></div>`,
-    fn:()=>{const lmp=$('c-lmp').value;if(!lmp)return null;const cyc=+($('c-cyc').value)||28;const d=new Date(lmp);d.setDate(d.getDate()+(280+(cyc-28)));const now=new Date(),diff=Math.round((d-now)/864e5),ga=Math.round((now-new Date(lmp))/864e5),gaW=Math.floor(ga/7),gaD=ga%7;return{v:d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),u:`GA: ${gaW}w ${gaD}d | ${diff>0?diff+' days remaining':'Due today / past due'}`,col:'#2DD4BF',i:`EDD: <strong>${d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</strong>. Current gestational age: ${gaW} weeks and ${gaD} days.`,note:"Naegele's Rule: LMP + 280 days, adjusted for cycle length. Ultrasound in T1 improves accuracy."};}},
-  bpclass:{sub:'ACC/AHA 2017 Blood Pressure Categories',
-    html:`<div class="field"><label>Systolic BP (mmHg)</label><input id="c-sbpc" type="number" placeholder="130"/></div><div class="field"><label>Diastolic BP (mmHg)</label><input id="c-dbpc" type="number" placeholder="85"/></div>`,
-    fn:()=>{const s=+($('c-sbpc').value),d=+($('c-dbpc').value);if(!s||!d)return null;const[cat,col]=s<120&&d<80?['Normal','#2DD4BF']:s<130&&d<80?['Elevated','#38BDF8']:s<140||d<90?['Stage 1 HTN','#F59E0B']:s<180&&d<120?['Stage 2 HTN','#F97316']:['Hypertensive Crisis','#EF4444'];return{v:`${s}/${d}`,u:`mmHg — ${cat}`,col,i:`<strong>${s}/${d} mmHg: ${cat}</strong>. ${cat==='Normal'?'Continue heart-healthy habits.':cat==='Elevated'?'Lifestyle changes recommended to prevent progression.':cat==='Stage 1 HTN'?'Lifestyle + antihypertensive therapy based on CVD risk.':cat==='Stage 2 HTN'?'Combination therapy recommended. Reassess in 1 month.':'⚠️ Urgent medical evaluation required. If symptomatic — Emergency.'}`,note:'Diagnosis requires confirmed readings on 2+ occasions. ACC/AHA 2017 guidelines.'};}},
-  shock:{sub:'Shock Index — Haemodynamic Instability',
-    html:`<div class="field"><label>Heart Rate (bpm)</label><input id="c-hr" type="number" placeholder="90"/></div><div class="field"><label>Systolic BP (mmHg)</label><input id="c-sbps" type="number" placeholder="120"/></div>`,
-    fn:()=>{const hr=+($('c-hr').value),sbp=+($('c-sbps').value);if(!hr||!sbp)return null;const si=hr/sbp;const[risk,col]=si<.6?['Low','#2DD4BF']:si<1?['Moderate','#38BDF8']:si<1.4?['High','#F97316']:['Critical','#EF4444'];return{v:si.toFixed(2),u:`Shock Index — ${risk} Risk`,col,i:`<strong>SI ${si.toFixed(2)} — ${risk} Risk</strong>. ${si<.6?'Haemodynamically stable.':si<1?'Monitor closely. Possible compensated haemorrhage.':si<1.4?'Haemodynamic instability likely. IV access + volume resuscitation.':'⚠️ Severe compromise. Immediate resuscitation + emergency surgical consult.'}`,note:'SI = HR / SBP. Normal: 0.5–0.7. SI >1.0 = significant haemorrhage and adverse outcomes.'};}},
-  burn:{sub:'Rule of Nines — Total Body Surface Area',
-    html:`<div class="field"><label>Head & Neck (%)</label><input id="c-bh" type="number" placeholder="0" min="0" max="9"/></div><div class="field"><label>Each Arm (% each)</label><input id="c-ba" type="number" placeholder="0" min="0" max="9"/></div><div class="field"><label>Anterior Trunk (%)</label><input id="c-bta" type="number" placeholder="0" min="0" max="18"/></div><div class="field"><label>Posterior Trunk (%)</label><input id="c-btp" type="number" placeholder="0" min="0" max="18"/></div><div class="field"><label>Each Leg (% each)</label><input id="c-bl" type="number" placeholder="0" min="0" max="18"/></div>`,
-    fn:()=>{const h=+($('c-bh').value)||0,a=+($('c-ba').value)||0,ta=+($('c-bta').value)||0,tp=+($('c-btp').value)||0,l=+($('c-bl').value)||0,t=h+(a*2)+ta+tp+(l*2);const[sev,col]=t<10?['Minor','#2DD4BF']:t<20?['Moderate','#38BDF8']:t<40?['Major','#F97316']:['Critical','#EF4444'];return{v:t.toFixed(0)+'%',u:`TBSA — ${sev} Burn`,col,i:`<strong>TBSA ${t}% — ${sev} Burn</strong>. ${t<10?'Outpatient management may be appropriate. Tetanus prophylaxis.':t<20?'Hospital admission. Parkland: 4mL×kg×TBSA in first 24h.':t<40?'Burns centre referral required.':'⚠️ Critical burns. Immediate specialist burns centre transfer.'}`,note:'Parkland formula: 4mL × weight(kg) × TBSA%. Give 50% in first 8h, 50% in next 16h.'};}},
-  pao2:{sub:'PaO₂/FiO₂ Ratio — Berlin ARDS Classification',
-    html:`<div class="field"><label>PaO₂ (mmHg)</label><input id="c-pao" type="number" placeholder="80"/></div><div class="field"><label>FiO₂ (0.21–1.0)</label><input id="c-fio" type="number" placeholder="0.5" step="0.01" min="0.21" max="1"/></div>`,
-    fn:()=>{const p=+($('c-pao').value),f=+($('c-fio').value);if(!p||!f)return null;const r=p/f;const[cat,col]=r>300?['Normal','#2DD4BF']:r>200?['Mild ARDS','#38BDF8']:r>100?['Moderate ARDS','#F97316']:['Severe ARDS','#EF4444'];return{v:Math.round(r),u:`mmHg — ${cat}`,col,i:`<strong>P/F Ratio ${Math.round(r)}: ${cat}</strong>. ${r>300?'Normal oxygenation.':r>200?'Mild ARDS. Optimise PEEP. Consider prone positioning.':r>100?'Moderate ARDS. Lung-protective ventilation required.':'Severe ARDS. Prone ventilation, consider ECMO evaluation.'}`,note:'Berlin definition: Mild >200, Moderate 100–200, Severe ≤100 mmHg (all on PEEP ≥5 cmH₂O).'};}},
-  map:{sub:'Mean Arterial Pressure',
-    html:`<div class="field"><label>Systolic BP (mmHg)</label><input id="c-sbp2" type="number" placeholder="120"/></div><div class="field"><label>Diastolic BP (mmHg)</label><input id="c-dbp" type="number" placeholder="80"/></div>`,
-    fn:()=>{const s=+($('c-sbp2').value),d=+($('c-dbp').value);if(!s||!d)return null;const m=d+(s-d)/3;const col=m>=70?'#2DD4BF':'#EF4444';return{v:m.toFixed(0),u:`mmHg | ${m>=70?'Adequate perfusion':'⚠️ Below perfusion threshold'}`,col,i:`<strong>MAP: ${m.toFixed(0)} mmHg</strong>. ${m>=70?'Adequate tissue perfusion. Target MAP >65 mmHg in septic shock.':'⚠️ MAP < 70 mmHg indicates inadequate organ perfusion. Vasopressors or fluid resuscitation may be required.'}`,note:'MAP = DBP + (SBP − DBP) / 3. Critical threshold: MAP < 65 mmHg in shock.'};}},
-  fluid:{sub:'Holliday-Segar Maintenance Fluid Formula',
-    html:`<div class="field"><label>Patient Weight (kg)</label><input id="c-fw" type="number" placeholder="70" min="1"/></div>`,
-    fn:()=>{const w=+($('c-fw').value);if(!w)return null;let ml=w<=10?w*100:w<=20?1000+(w-10)*50:1500+(w-20)*20;return{v:Math.round(ml),u:`mL/day | ${Math.round(ml/24)} mL/hour`,col:'#2DD4BF',i:`Daily maintenance fluid: <strong>${Math.round(ml)} mL/day</strong> (${Math.round(ml/24)} mL/hr). Adjust for fever, increased losses, or clinical conditions.`,note:'0–10kg: 100mL/kg/day; 10–20kg: 1000+50/kg; >20kg: 1500+20/kg.'};}},
-  ag:{sub:'Anion Gap — Metabolic Acidosis',
-    html:`<div class="field"><label>Sodium (Na⁺) mEq/L</label><input id="c-na" type="number" placeholder="140"/></div><div class="field"><label>Chloride (Cl⁻) mEq/L</label><input id="c-cl" type="number" placeholder="102"/></div><div class="field"><label>Bicarbonate (HCO₃⁻) mEq/L</label><input id="c-hco" type="number" placeholder="24"/></div><div class="field"><label>Albumin (g/dL)</label><input id="c-alb" type="number" placeholder="4.0" step="0.1"/></div>`,
-    fn:()=>{const na=+($('c-na').value),cl=+($('c-cl').value),hco=+($('c-hco').value);if(!na||!cl||!hco)return null;const alb=+($('c-alb').value)||4,ag=na-cl-hco,corr=ag+2.5*(4-alb);const col=ag<=12?'#2DD4BF':'#F59E0B';return{v:ag.toFixed(0),u:`mEq/L | Corrected: ${corr.toFixed(0)} mEq/L`,col,i:`<strong>AG: ${ag} (Corrected: ${corr.toFixed(0)}) mEq/L</strong>. ${ag<=12?'Normal AG. Consider NAGMA: hyperchloraemia, diarrhoea, RTA.':'Elevated AG. MUDPILES: Methanol, Uraemia, DKA, Propylene glycol, Iron, Lactic acidosis, Ethylene glycol, Salicylates.'}`,note:'Normal: 8–12 mEq/L. Always correct for hypoalbuminaemia: +2.5 per 1g/dL decrease below 4.'};}},
-  osm:{sub:'Calculated Serum Osmolality',
-    html:`<div class="field"><label>Sodium (mEq/L)</label><input id="c-osna" type="number" placeholder="140"/></div><div class="field"><label>Glucose (mg/dL)</label><input id="c-osglu" type="number" placeholder="90"/></div><div class="field"><label>BUN (mg/dL)</label><input id="c-osbun" type="number" placeholder="14"/></div>`,
-    fn:()=>{const na=+($('c-osna').value),g=+($('c-osglu').value),b=+($('c-osbun').value);if(!na||!g||!b)return null;const o=2*na+(g/18)+(b/2.8);const[cat,col]=o<275?['Low','#38BDF8']:o<=295?['Normal','#2DD4BF']:o<=320?['Mildly Elevated','#F59E0B']:['Markedly Elevated','#EF4444'];return{v:o.toFixed(0),u:`mOsm/kg — ${cat} (Normal: 275–295)`,col,i:`<strong>Calculated Osmolality: ${o.toFixed(0)} mOsm/kg (${cat})</strong>. ${o<275?'Hypoosmolality: Consider SIADH, polydipsia, hypothyroidism.':o<=295?'Normal effective osmolarity.':o<=320?'Mild hyperosmolality. Consider hypernatraemia or hyperglycaemia.':'Severe hyperosmolality. High mortality if due to HHS or toxic alcohol.'}`,note:'Formula: 2×Na + (Glucose/18) + (BUN/2.8). Osmolar gap = measured − calculated; >10 = toxic alcohol.'};
-    }},
-  hrzone:{sub:'Heart Rate Training Zones by Age',
-    html:`<div class="field"><label>Age (years)</label><input id="c-hrage" type="number" placeholder="35" min="10" max="90"/></div><div class="field"><label>Resting Heart Rate (bpm)</label><input id="c-hrrest" type="number" placeholder="65" min="30"/></div>`,
-    fn:()=>{const age=+($('c-hrage').value),rest=+($('c-hrrest').value)||0;if(!age)return null;const mhr=220-age,hrr=rest?mhr-rest:null;const k=p=>hrr?Math.round(rest+hrr*(p/100)):Math.round(mhr*(p/100));const zones=[['Zone 1 (Warm-up)','50–60%',k(50),k(60)],['Zone 2 (Fat Burn)','60–70%',k(60),k(70)],['Zone 3 (Aerobic)','70–80%',k(70),k(80)],['Zone 4 (Anaerobic)','80–90%',k(80),k(90)],['Zone 5 (Max)','90–100%',k(90),k(100)]];return{v:mhr,u:`bpm Max HR | Resting: ${rest||'N/A'} bpm`,col:'#2DD4BF',i:zones.map(([n,p,lo,hi])=>`<strong>${n}</strong> (${p}): ${lo}–${hi} bpm`).join('<br>'),note:`Max HR = 220 − age. ${rest?'Using Karvonen formula.':'Using % MaxHR formula.'}`};}},
-  ibw:{sub:'Ideal Body Weight — Devine Formula',
-    html:`<div class="field"><label>Height (cm)</label><input id="c-ih" type="number" placeholder="170"/></div><div class="field"><label>Sex</label><select id="c-is"><option value="male">Male</option><option value="female">Female</option></select></div>`,
-    fn:()=>{let h=+($('c-ih').value);if(!h)return null;const sex=$('c-is').value,inches=(h/2.54)-60,ibw=(sex==='male'?50:45.5)+2.3*inches;if(ibw<20)return null;return{v:ibw.toFixed(1)+' kg',u:`IBW | Range: ${(ibw*.9).toFixed(1)}–${(ibw*1.1).toFixed(1)} kg`,col:'#2DD4BF',i:`IBW: <strong>${ibw.toFixed(1)} kg</strong>. Acceptable range ±10%: ${(ibw*.9).toFixed(1)}–${(ibw*1.1).toFixed(1)} kg.`,note:'Devine: Male 50 + 2.3kg/inch >5ft. Female 45.5 + 2.3kg/inch >5ft. Use for drug dosing.'};}},
-  bsa:{sub:'Body Surface Area — Mosteller Formula',
-    html:`<div class="field"><label>Weight (kg)</label><input id="c-bsaw" type="number" placeholder="70"/></div><div class="field"><label>Height (cm)</label><input id="c-bsah" type="number" placeholder="170"/></div>`,
-    fn:()=>{const w=+($('c-bsaw').value),h=+($('c-bsah').value);if(!w||!h)return null;const m=Math.sqrt(h*w/3600);return{v:m.toFixed(2),u:'m² — Mosteller Formula',col:'#2DD4BF',i:`BSA: <strong>${m.toFixed(2)} m²</strong>. Normal adult BSA: 1.7–1.9 m². Used for chemotherapy dosing, cardiac output indexing, and burn management.`,note:'BSA = √(h(cm) × w(kg) / 3600).'};}},
-  bmr:{sub:'Basal Metabolic Rate — Mifflin-St Jeor',
-    html:`<div class="field"><label>Weight (kg)</label><input id="c-bmrw" type="number" placeholder="70"/></div><div class="field"><label>Height (cm)</label><input id="c-bmrh" type="number" placeholder="170"/></div><div class="field"><label>Age (years)</label><input id="c-bmra" type="number" placeholder="35"/></div><div class="field"><label>Sex</label><select id="c-bmrs"><option value="male">Male</option><option value="female">Female</option></select></div>`,
-    fn:()=>{const w=+($('c-bmrw').value),h=+($('c-bmrh').value),a=+($('c-bmra').value),s=$('c-bmrs').value;if(!w||!h||!a)return null;const b=10*w+6.25*h-5*a+(s==='male'?5:-161);return{v:Math.round(b),u:'kcal/day (Mifflin-St Jeor)',col:'#2DD4BF',i:`BMR: <strong>${Math.round(b)} kcal/day</strong>. Multiply by activity factor: Sedentary ×1.2, Light ×1.375, Moderate ×1.55, Active ×1.725.`,note:'Most accurate BMR equation for modern populations.'};}},
-  tdee:{sub:'Total Daily Energy Expenditure',
-    html:`<div class="field"><label>Weight (kg)</label><input id="c-tw" type="number" placeholder="70"/></div><div class="field"><label>Height (cm)</label><input id="c-th" type="number" placeholder="170"/></div><div class="field"><label>Age</label><input id="c-ta" type="number" placeholder="35"/></div><div class="field"><label>Sex</label><select id="c-ts"><option value="male">Male</option><option value="female">Female</option></select></div><div class="field"><label>Activity Level</label><select id="c-tact"><option value="1.2">Sedentary</option><option value="1.375">Lightly active (1–3×/week)</option><option value="1.55">Moderately active (3–5×/week)</option><option value="1.725">Very active (6–7×/week)</option></select></div>`,
-    fn:()=>{const w=+($('c-tw').value),h=+($('c-th').value),a=+($('c-ta').value),s=$('c-ts').value,act=+($('c-tact').value);if(!w||!h||!a)return null;const bmr=10*w+6.25*h-5*a+(s==='male'?5:-161),tdee=Math.round(bmr*act);return{v:tdee,u:'kcal/day maintenance calories',col:'#2DD4BF',i:`TDEE: <strong>${tdee} kcal/day</strong>. Weight loss: ${tdee-500} kcal/day (−0.5kg/week). Weight gain: ${tdee+500} kcal/day (+0.5kg/week).`,note:'TDEE = BMR × Activity Factor (Mifflin-St Jeor).'};}},
-  dose:{sub:'Weight-Based Drug Dosing',
-    html:`<div class="field"><label>Patient Weight (kg)</label><input id="c-dw" type="number" placeholder="70"/></div><div class="field"><label>Dose (mg/kg)</label><input id="c-dpk" type="number" placeholder="10" step="0.1"/></div><div class="field"><label>Frequency</label><select id="c-df"><option value="1">Once daily (OD)</option><option value="2">Twice daily (BD)</option><option value="3">Three times daily (TDS)</option><option value="4">Four times daily (QDS)</option></select></div>`,
-    fn:()=>{const w=+($('c-dw').value),d=+($('c-dpk').value),f=+($('c-df').value);if(!w||!d)return null;const dose=w*d,total=dose*f;return{v:dose.toFixed(1)+' mg',u:`per dose | ${total.toFixed(1)} mg/day (${f}×/day)`,col:'#2DD4BF',i:`Single dose: <strong>${dose.toFixed(1)} mg</strong>. Daily total: ${total.toFixed(1)} mg given ${f}× per day.`,note:'Always verify against maximum dose and adjust for renal/hepatic impairment.'};}},
-  crcl:{sub:'Creatinine Clearance — Cockcroft-Gault',
-    html:`<div class="field"><label>Age (years)</label><input id="c-cca" type="number" placeholder="60"/></div><div class="field"><label>Weight (kg)</label><input id="c-ccw" type="number" placeholder="70"/></div><div class="field"><label>Serum Creatinine (mg/dL)</label><input id="c-ccr" type="number" placeholder="1.0" step="0.1"/></div><div class="field"><label>Sex</label><select id="c-ccs"><option value="1">Male</option><option value="0.85">Female</option></select></div>`,
-    fn:()=>{const a=+($('c-cca').value),w=+($('c-ccw').value),cr=+($('c-ccr').value),sf=+($('c-ccs').value);if(!a||!w||!cr)return null;const crcl=((140-a)*w/(72*cr))*sf;const[st,col]=crcl>=90?['Normal','#2DD4BF']:crcl>=60?['Mildly Decreased','#38BDF8']:crcl>=30?['Moderate','#F59E0B']:['Severe','#EF4444'];return{v:crcl.toFixed(1),u:`mL/min — ${st}`,col,i:`CrCl: <strong>${crcl.toFixed(1)} mL/min — ${st}</strong>. ${crcl>=60?'No routine dose adjustment.':'Many drugs require dose reduction or extended intervals. Check prescribing information.'}`,note:'Cockcroft-Gault: [(140−age) × weight / (72 × SCr)] × 0.85 (females). Use for drug dosing.'};}},
-  diabrisk:{sub:'ADA Type 2 Diabetes Risk Assessment',
-    html:`<div class="field"><label>Age</label><select id="c-da"><option value="0">Under 40</option><option value="1">40–49</option><option value="2">50–59</option><option value="3">60+</option></select></div><div class="field"><label>BMI</label><select id="c-db"><option value="0">Under 25 (normal)</option><option value="1">25–29.9 (overweight)</option><option value="2">30–39.9 (obese)</option><option value="3">40+ (severely obese)</option></select></div><div class="field"><label>Family History</label><select id="c-df"><option value="0">No close relatives with diabetes</option><option value="1">Parent or sibling has diabetes</option></select></div><div class="field"><label>High Blood Pressure</label><select id="c-dh"><option value="0">No</option><option value="1">Yes</option></select></div><div class="field"><label>Physical Activity</label><select id="c-dp"><option value="0">Active (≥3×/week)</option><option value="1">Moderately active</option><option value="2">Sedentary</option></select></div>`,
-    fn:()=>{const sc=[+($('c-da').value),+($('c-db').value),+($('c-df').value),+($('c-dh').value),+($('c-dp').value)].reduce((a,b)=>a+b,0);const[risk,col]=sc<=1?['Low','#2DD4BF']:sc<=3?['Moderate','#F59E0B']:['High','#EF4444'];return{v:sc,u:`Risk Score — ${risk} Risk`,col,i:`Score ${sc}: <strong>${risk} diabetes risk</strong>. ${sc<=1?'Maintain healthy lifestyle.':sc<=3?'Lifestyle modification recommended. Annual HbA1c screening advised.':'HbA1c or fasting glucose testing strongly recommended. Intensive lifestyle intervention indicated.'}`,note:'ADA risk factors. Blood tests required for diagnosis. Not a diagnostic tool.'};}},
-  homa:{sub:'HOMA-IR — Insulin Resistance Index',
-    html:`<div class="field"><label>Fasting Glucose (mg/dL)</label><input id="c-hfg" type="number" placeholder="90" step="0.1"/></div><div class="field"><label>Fasting Insulin (µU/mL)</label><input id="c-hfi" type="number" placeholder="10" step="0.1"/></div>`,
-    fn:()=>{const g=+($('c-hfg').value),i=+($('c-hfi').value);if(!g||!i)return null;const homa=(g*i)/405;const[cat,col]=homa<1?['Normal Sensitivity','#2DD4BF']:homa<2?['Early Resistance','#F59E0B']:homa<3?['Insulin Resistance','#F97316']:['Significant Resistance','#EF4444'];return{v:homa.toFixed(2),u:`HOMA-IR — ${cat}`,col,i:`<strong>HOMA-IR: ${homa.toFixed(2)} (${cat})</strong>. ${homa<1?'Normal insulin sensitivity.':homa<2?'Early signs of resistance. Lifestyle modification indicated.':homa<3?'Insulin resistance present. Formal metabolic evaluation recommended.':'Significant insulin resistance. Endocrinology referral and intervention required.'}`,note:'HOMA-IR = (Fasting Glucose × Fasting Insulin) / 405. Normal <1.0. Interpret in clinical context.'};}},
-  hba1c:{sub:'HbA1c — Estimated Average Glucose',
-    html:`<div class="field"><label>HbA1c (%)</label><input id="c-hba" type="number" placeholder="6.5" step="0.1" min="4" max="20"/></div>`,
-    fn:()=>{const h=+($('c-hba').value);if(!h)return null;const eag=28.7*h-46.7;const[cat,col]=h<5.7?['Non-diabetic','#2DD4BF']:h<6.4?['Pre-diabetes','#38BDF8']:h<7?['Good Control','#2DD4BF']:h<8?['Suboptimal','#F59E0B']:['Poor Control','#EF4444'];return{v:h+'%',u:`HbA1c | eAG: ${Math.round(eag)} mg/dL (${(eag/18).toFixed(1)} mmol/L) — ${cat}`,col,i:`HbA1c ${h}%: <strong>${cat}</strong>. eAG: ${Math.round(eag)} mg/dL. ${h<5.7?'Normal — non-diabetic range.':h<6.4?'Pre-diabetes. Lifestyle intervention to prevent T2DM.':h<7?'Good diabetic control. Maintain current therapy.':h<8?'Suboptimal control. Review diet, adherence, and medication.':'Poor control. Treatment intensification required urgently.'}`,note:'HbA1c reflects avg glucose over 2–3 months. eAG = 28.7×HbA1c − 46.7.'};}},
-  apgar:{sub:'APGAR Score — Newborn Assessment',
-    html:`<div class="field"><label>Appearance (Skin Colour)</label><select id="c-ap"><option value="0">0 — Blue/pale all over</option><option value="1">1 — Blue at extremities</option><option value="2">2 — Pink all over</option></select></div><div class="field"><label>Pulse (Heart Rate)</label><select id="c-pp"><option value="0">0 — Absent</option><option value="1">1 — Less than 100 bpm</option><option value="2">2 — 100+ bpm</option></select></div><div class="field"><label>Grimace (Reflex)</label><select id="c-pg"><option value="0">0 — No response</option><option value="1">1 — Grimace</option><option value="2">2 — Cry/cough/sneeze</option></select></div><div class="field"><label>Activity (Muscle Tone)</label><select id="c-pac"><option value="0">0 — Limp</option><option value="1">1 — Some flexion</option><option value="2">2 — Active motion</option></select></div><div class="field"><label>Respiration</label><select id="c-pr"><option value="0">0 — Absent</option><option value="1">1 — Weak/irregular</option><option value="2">2 — Strong cry</option></select></div>`,
-    fn:()=>{const sc=['c-ap','c-pp','c-pg','c-pac','c-pr'].reduce((s,id)=>s+(+$(id).value),0);const[st,col]=sc>=7?['Normal','#2DD4BF']:sc>=4?['Moderate Depression','#F59E0B']:['Severe Depression','#EF4444'];return{v:sc,u:`/ 10 — ${st}`,col,i:`APGAR ${sc}/10: <strong>${st}</strong>. ${sc>=7?'Routine newborn care. Reassess at 5 minutes.':sc>=4?'Stimulation and supplemental O₂ required. Reassess at 5 minutes.':'⚠️ Immediate resuscitation required. Activate NRP protocol.'}`,note:'Assessed at 1 and 5 minutes. A + P + G + A + R.'};}},
-  peddose:{sub:'Pediatric Weight-Based Drug Dosing',
-    html:`<div class="field"><label>Weight (kg)</label><input id="c-pw" type="number" placeholder="15" min="0.5"/></div><div class="field"><label>Dose (mg/kg)</label><input id="c-pd" type="number" placeholder="10" step="0.1"/></div><div class="field"><label>Frequency</label><select id="c-pf"><option value="1">OD (once daily)</option><option value="2">BD (twice daily)</option><option value="3">TDS (three times daily)</option><option value="4">QDS (four times daily)</option><option value="6">6-hourly</option><option value="8">8-hourly</option></select></div>`,
-    fn:()=>{const w=+($('c-pw').value),d=+($('c-pd').value),f=+($('c-pf').value);if(!w||!d)return null;const single=w*d,daily=single*f;return{v:single.toFixed(2)+' mg',u:`per dose | ${daily.toFixed(2)} mg/day`,col:'#2DD4BF',i:`Single dose: <strong>${single.toFixed(2)} mg</strong>. Daily total: ${daily.toFixed(2)} mg (${f}× per day).`,note:'Always verify against maximum pediatric dose. Adjust for renal/hepatic status.'};}},
-  pedfluid:{sub:'Holliday-Segar Maintenance Fluids — Pediatric',
-    html:`<div class="field"><label>Child Weight (kg)</label><input id="c-pfw" type="number" placeholder="15" min="0.5"/></div>`,
-    fn:()=>{const w=+($('c-pfw').value);if(!w)return null;let ml=w<=10?w*100:w<=20?1000+(w-10)*50:1500+(w-20)*20;return{v:Math.round(ml),u:`mL/day | ${Math.round(ml/24)} mL/hr`,col:'#2DD4BF',i:`Maintenance fluid: <strong>${Math.round(ml)} mL/day</strong> (${Math.round(ml/24)} mL/hr IV).`,note:'Holliday-Segar: 0–10kg: 100mL/kg/day; 10–20kg: +50/kg; >20kg: +20/kg.'};}},
-  water:{sub:'Daily Water Intake Recommendation',
-    html:`<div class="field"><label>Body Weight (kg)</label><input id="c-wt" type="number" placeholder="70" min="1"/></div><div class="field"><label>Activity Level</label><select id="c-wact"><option value="30">Sedentary</option><option value="35">Lightly active</option><option value="40">Moderately active</option><option value="45">Very active / athlete</option></select></div>`,
-    fn:()=>{const w=+($('c-wt').value),ml_per_kg=+($('c-wact').value);if(!w)return null;const daily=w*ml_per_kg;return{v:(daily/1000).toFixed(1)+' L',u:`per day | ${daily} mL | ${Math.ceil(daily/250)} glasses`,col:'#38BDF8',i:`Daily target: <strong>${(daily/1000).toFixed(1)} litres</strong>. Increase by 500mL–1L per hour of exercise or in hot climates.`,note:'General guideline: 30–45mL/kg/day. Individual needs vary with health status and climate.'};}},
-  protein:{sub:'Daily Protein Intake Calculator',
-    html:`<div class="field"><label>Body Weight (kg)</label><input id="c-prw" type="number" placeholder="70" min="1"/></div><div class="field"><label>Goal / Activity Level</label><select id="c-prg"><option value="0.8">Sedentary (maintenance)</option><option value="1.2">Lightly active</option><option value="1.6">Fitness / general exercise</option><option value="2.0">Muscle building / athlete</option><option value="2.5">Competitive bodybuilder</option></select></div>`,
-    fn:()=>{const w=+($('c-prw').value),g=+($('c-prg').value);if(!w)return null;const p=w*g;return{v:p.toFixed(0)+' g',u:'protein per day',col:'#2DD4BF',i:`Protein target: <strong>${p.toFixed(0)} g/day</strong> (${g} g/kg). Spread across 3–5 meals for optimal muscle protein synthesis.`,note:'RDA: 0.8g/kg/day sedentary. Athletes: 1.6–2.2g/kg/day. Kidney disease: consult nephrologist.'};}},
-  edd:{sub:"Naegele's Rule — Pregnancy Due Date",
-    html:`<div class="field"><label>First Day of Last Menstrual Period</label><input id="c-lmp" type="date"/></div><div class="field"><label>Cycle Length (days)</label><input id="c-cyc" type="number" placeholder="28" min="21" max="45"/></div>`,
-    fn:()=>{const lmp=$('c-lmp').value;if(!lmp)return null;const cyc=+($('c-cyc').value)||28;const d=new Date(lmp);d.setDate(d.getDate()+(280+(cyc-28)));const now=new Date(),diff=Math.round((d-now)/864e5),ga=Math.round((now-new Date(lmp))/864e5);const gaW=Math.floor(ga/7),gaD=ga%7;return{v:d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),u:`GA: ${gaW}w ${gaD}d | ${diff>0?diff+' days remaining':'Due today / past due'}`,col:'#2DD4BF',i:`EDD: <strong>${d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</strong>. GA: ${gaW}w ${gaD}d.`,note:"Naegele's Rule: LMP + 280 days ± cycle adjustment."};}},
-  ovul:{sub:'Fertile Window & Ovulation Prediction',
-    html:`<div class="field"><label>First Day of Last Period</label><input id="c-olmp" type="date"/></div><div class="field"><label>Cycle Length (days)</label><input id="c-ocyc" type="number" placeholder="28" min="21" max="45"/></div>`,
-    fn:()=>{const lmp=$('c-olmp').value;if(!lmp)return null;const cyc=+($('c-ocyc').value)||28,ovDay=cyc-14;const ov=new Date(lmp);ov.setDate(ov.getDate()+ovDay);const w1=new Date(lmp);w1.setDate(w1.getDate()+ovDay-3);const w2=new Date(lmp);w2.setDate(w2.getDate()+ovDay+1);const fmt=dt=>dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'});return{v:fmt(ov),u:'Predicted Ovulation Date',col:'#F472B6',i:`Ovulation: <strong>${fmt(ov)}</strong>. Most fertile window: ${fmt(w1)}–${fmt(w2)}. Best days to conceive: 2 days before and day of ovulation.`,note:'Ovulation typically occurs 14 days before next period. Sperm survive 3–5 days.'};}},
-  diabriskuser:{sub:'Are you at risk for Type 2 diabetes?',
-    html:`<div class="field"><label>Your Age</label><select id="c-dau"><option value="0">Under 40</option><option value="1">40–49</option><option value="2">50–59</option><option value="3">60 or older</option></select></div><div class="field"><label>Body Weight</label><select id="c-dbu"><option value="0">Healthy weight</option><option value="1">Slightly overweight</option><option value="2">Overweight/obese</option><option value="3">Very overweight</option></select></div><div class="field"><label>Family History</label><select id="c-dfu"><option value="0">No close relatives with diabetes</option><option value="1">Parent or sibling has diabetes</option></select></div><div class="field"><label>High blood pressure?</label><select id="c-dhu"><option value="0">No</option><option value="1">Yes</option></select></div><div class="field"><label>How active are you?</label><select id="c-dpu"><option value="0">Exercise regularly</option><option value="1">Somewhat active</option><option value="2">Mostly sedentary</option></select></div>`,
-    fn:()=>{const sc=[+($('c-dau').value),+($('c-dbu').value),+($('c-dfu').value),+($('c-dhu').value),+($('c-dpu').value)].reduce((a,b)=>a+b,0);const[risk,col]=sc<=1?['Low Risk','#2DD4BF']:sc<=3?['Moderate Risk','#F59E0B']:['High Risk','#EF4444'];return{v:sc,u:`Score — ${risk}`,col,i:sc<=1?'Great! Your risk factors suggest low diabetes risk. Keep up healthy habits.':sc<=3?'You have some risk factors. Small lifestyle changes — more exercise, healthier eating — can significantly reduce your risk.':'You have several risk factors. Please speak with a doctor and ask for a blood sugar test. Early detection can prevent diabetes.',note:'Screening tool only — not a diagnosis. Blood tests required to confirm diabetes.'};}},
-  hba1cuser:{sub:'What does your HbA1c mean?',
-    html:`<div class="field"><label>Your HbA1c (%)</label><input id="c-hbau" type="number" placeholder="6.5" step="0.1" min="4" max="20"/></div>`,
-    fn:()=>{const h=+($('c-hbau').value);if(!h)return null;const eag=28.7*h-46.7;const[cat,col]=h<5.7?['Normal','#2DD4BF']:h<6.4?['Pre-diabetes','#38BDF8']:h<7?['Well-controlled Diabetes','#2DD4BF']:h<8?['Suboptimal Control','#F59E0B']:['Poor Control','#EF4444'];return{v:h+'%',u:`HbA1c | eAG: ${Math.round(eag)} mg/dL — ${cat}`,col,i:h<5.7?`Your HbA1c of ${h}% is normal.`:h<6.4?`Pre-diabetes range. Lifestyle changes can reverse this.`:h<7?`Good control! Your average blood sugar is ${Math.round(eag)} mg/dL.`:h<8?`Suboptimal — speak with your doctor about improving control.`:`High — please see your doctor urgently to review your diabetes management.`,note:'HbA1c reflects your average blood sugar over the past 2–3 months.'};}},
-  bptrack:{sub:'ACC/AHA 2017 Blood Pressure Classification',
-    html:`<div class="field"><label>Systolic (top number)</label><input id="c-bpsu" type="number" placeholder="130"/></div><div class="field"><label>Diastolic (bottom number)</label><input id="c-bpdu" type="number" placeholder="85"/></div>`,
-    fn:()=>{const s=+($('c-bpsu').value),d=+($('c-bpdu').value);if(!s||!d)return null;const[cat,col]=s<120&&d<80?['Normal','#2DD4BF']:s<130&&d<80?['Elevated','#38BDF8']:s<140||d<90?['Stage 1 Hypertension','#F59E0B']:s<180&&d<120?['Stage 2 Hypertension','#F97316']:['Hypertensive Crisis','#EF4444'];return{v:`${s}/${d}`,u:`mmHg — ${cat}`,col,i:cat==='Normal'?`${s}/${d} is a normal blood pressure. Keep it up with a healthy lifestyle.`:cat==='Elevated'?'Slightly elevated. Reduce salt, increase exercise, and monitor regularly.':cat==='Stage 1 Hypertension'?'Stage 1 hypertension. Lifestyle changes essential; discuss medication with your doctor.':cat==='Stage 2 Hypertension'?'Stage 2 hypertension. Please see a doctor. Medication is likely required.':'⚠️ Hypertensive crisis. Seek urgent medical care, especially if experiencing symptoms.',note:'Take readings consistently: same arm, sitting, after 5 minutes of rest.'};}},
-  hrzoneuser:{sub:'Training Heart Rate Zones',
-    html:`<div class="field"><label>Your Age (years)</label><input id="c-hzu" type="number" placeholder="30" min="10" max="90"/></div><div class="field"><label>Resting Heart Rate (bpm)</label><input id="c-hzr" type="number" placeholder="65" min="30"/></div>`,
-    fn:()=>{const age=+($('c-hzu').value),rest=+($('c-hzr').value)||0;if(!age)return null;const mhr=220-age,hrr=rest?mhr-rest:null;const k=p=>hrr?Math.round(rest+hrr*(p/100)):Math.round(mhr*(p/100));return{v:mhr,u:`bpm Max Heart Rate (Age ${age})`,col:'#2DD4BF',i:`<strong>Zone 1 (Warm-up):</strong> ${k(50)}–${k(60)} bpm<br><strong>Zone 2 (Fat burn):</strong> ${k(60)}–${k(70)} bpm<br><strong>Zone 3 (Aerobic):</strong> ${k(70)}–${k(80)} bpm<br><strong>Zone 4 (Intense):</strong> ${k(80)}–${k(90)} bpm<br><strong>Zone 5 (Max):</strong> ${k(90)}–${k(100)} bpm`,note:'Max HR = 220 − age. For most health benefits, aim for Zone 2–3 for 150 minutes/week.'};}},
-  edduser:{sub:'When is your baby due?',
-    html:`<div class="field"><label>First Day of Last Period</label><input id="c-lmpu" type="date"/></div><div class="field"><label>Your Cycle Length (days)</label><input id="c-cycu" type="number" placeholder="28" min="21" max="45"/></div>`,
-    fn:()=>{const lmp=$('c-lmpu').value;if(!lmp)return null;const cyc=+($('c-cycu').value)||28;const d=new Date(lmp);d.setDate(d.getDate()+(280+(cyc-28)));const now=new Date(),diff=Math.round((d-now)/864e5),ga=Math.round((now-new Date(lmp))/864e5);const gaW=Math.floor(ga/7),gaD=ga%7;return{v:d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),u:`${gaW} weeks ${gaD} days pregnant | ${diff>0?diff+' days to go':'Due today!'}`,col:'#F472B6',i:`Your baby is due: <strong>${d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</strong>. You are ${gaW} weeks and ${gaD} days pregnant!`,note:'Based on your last period. An early ultrasound scan gives the most accurate date.'};}},
-  menstcycle:{sub:'Next Period & Cycle Prediction',
-    html:`<div class="field"><label>First Day of Last Period</label><input id="c-mc1" type="date"/></div><div class="field"><label>Cycle Length (days)</label><input id="c-mcc" type="number" placeholder="28" min="21" max="45"/></div><div class="field"><label>Period Duration (days)</label><input id="c-mcd" type="number" placeholder="5" min="1" max="10"/></div>`,
-    fn:()=>{const lmp=$('c-mc1').value;if(!lmp)return null;const cyc=+($('c-mcc').value)||28,dur=+($('c-mcd').value)||5;const next=new Date(lmp);next.setDate(next.getDate()+cyc);const end=new Date(next);end.setDate(end.getDate()+dur-1);const now=new Date(),days=Math.round((next-now)/864e5);const fmt=dt=>dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'});return{v:fmt(next),u:`Next period | Duration: ${dur} days | ${days>0?days+' days away':'Period may have started'}`,col:'#F472B6',i:`Next period expected: <strong>${fmt(next)}–${fmt(end)}</strong> (${dur} days). ${days>0?`${days} days from today.`:'Your period may have already started.'}`,note:`Cycle: ${cyc} days. Track 3+ cycles for improved accuracy.`};}},
-  ovuluser:{sub:'Find Your Most Fertile Days',
-    html:`<div class="field"><label>First Day of Last Period</label><input id="c-olu" type="date"/></div><div class="field"><label>Cycle Length (days)</label><input id="c-olcu" type="number" placeholder="28" min="21" max="45"/></div>`,
-    fn:()=>{const lmp=$('c-olu').value;if(!lmp)return null;const cyc=+($('c-olcu').value)||28,ovDay=cyc-14;const ov=new Date(lmp);ov.setDate(ov.getDate()+ovDay);const w1=new Date(lmp);w1.setDate(w1.getDate()+ovDay-3);const w2=new Date(lmp);w2.setDate(w2.getDate()+ovDay+1);const fmt=dt=>dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'});return{v:fmt(ov),u:'Estimated Ovulation Date',col:'#F472B6',i:`Ovulation: <strong>${fmt(ov)}</strong>. Most fertile window: <strong>${fmt(w1)} – ${fmt(w2)}</strong>. The best days to try to conceive are 1–2 days before ovulation.`,note:'Sperm can survive up to 5 days. Use LH ovulation test strips for confirmation.'};}},
-  dailycal:{sub:'How Many Calories Do You Need?',
-    html:`<div class="field"><label>Weight (kg)</label><input id="c-dcw" type="number" placeholder="65"/></div><div class="field"><label>Height (cm)</label><input id="c-dch" type="number" placeholder="165"/></div><div class="field"><label>Age</label><input id="c-dca" type="number" placeholder="30"/></div><div class="field"><label>Sex</label><select id="c-dcs"><option value="male">Male</option><option value="female">Female</option></select></div><div class="field"><label>Activity Level</label><select id="c-dcact"><option value="1.2">Sedentary</option><option value="1.375">Lightly active</option><option value="1.55">Moderately active</option><option value="1.725">Very active</option></select></div>`,
-    fn:()=>{const w=+($('c-dcw').value),h=+($('c-dch').value),a=+($('c-dca').value),s=$('c-dcs').value,act=+($('c-dcact').value);if(!w||!h||!a)return null;const bmr=10*w+6.25*h-5*a+(s==='male'?5:-161),tdee=Math.round(bmr*act);return{v:tdee,u:`calories per day (maintenance)`,col:'#2DD4BF',i:`Your daily calorie need is <strong>${tdee} kcal</strong>. To lose weight: ${tdee-500} kcal/day. To gain weight: ${tdee+500} kcal/day.`,note:'These are estimates. Actual needs vary. Consult a dietitian for personalized advice.'};}},
-  calfit:{sub:'Calories for Your Weight Goal',
-    html:`<div class="field"><label>Weight (kg)</label><input id="c-cfw" type="number" placeholder="65"/></div><div class="field"><label>Height (cm)</label><input id="c-cfh" type="number" placeholder="165"/></div><div class="field"><label>Age</label><input id="c-cfa" type="number" placeholder="30"/></div><div class="field"><label>Sex</label><select id="c-cfs"><option value="male">Male</option><option value="female">Female</option></select></div><div class="field"><label>Goal</label><select id="c-cfg"><option value="0">Maintain current weight</option><option value="-500">Lose weight (0.5kg/week)</option><option value="-750">Lose weight faster (0.75kg/week)</option><option value="500">Gain muscle (0.5kg/week)</option></select></div>`,
-    fn:()=>{const w=+($('c-cfw').value),h=+($('c-cfh').value),a=+($('c-cfa').value),s=$('c-cfs').value,goal=+($('c-cfg').value);if(!w||!h||!a)return null;const bmr=10*w+6.25*h-5*a+(s==='male'?5:-161),tdee=Math.round(bmr*1.375)+goal;return{v:tdee,u:'calories/day target',col:'#2DD4BF',i:`Daily calorie target: <strong>${tdee} kcal</strong>. ${goal===0?'This maintains your current weight.':goal<0?`This will help you lose approximately ${Math.abs(goal)/500*0.5}kg per week.`:'This supports gradual muscle gain when combined with resistance training.'}`,note:'Adjust intake based on actual results after 2–3 weeks.'};}},
-  macrouser:{sub:'Your Daily Macro Targets',
-    html:`<div class="field"><label>Daily Calorie Goal</label><input id="c-mcu" type="number" placeholder="2000"/></div><div class="field"><label>Goal</label><select id="c-mcug"><option value="balanced">Balanced</option><option value="muscle">Build Muscle (High protein)</option><option value="loss">Fat Loss (Moderate carb)</option><option value="keto">Ketogenic (Low carb)</option></select></div>`,
-    fn:()=>{const cal=+($('c-mcu').value),g=$('c-mcug').value;if(!cal)return null;let p,c,f;if(g==='balanced'){p=.25;c=.45;f=.30}else if(g==='muscle'){p=.35;c=.40;f=.25}else if(g==='loss'){p=.35;c=.35;f=.30}else{p=.25;c=.05;f=.70}const pg=Math.round(cal*p/4),cg=Math.round(cal*c/4),fg=Math.round(cal*f/9);return{v:cal,u:`kcal | ${g} approach`,col:'#2DD4BF',i:`<strong>Protein: ${pg}g</strong> (${Math.round(p*100)}%)<br><strong>Carbohydrates: ${cg}g</strong> (${Math.round(c*100)}%)<br><strong>Fat: ${fg}g</strong> (${Math.round(f*100)}%)`,note:'1g protein = 4kcal, 1g carb = 4kcal, 1g fat = 9kcal.'};}},
-  calburn:{sub:'Calories Burned During Exercise',
-    html:`<div class="field"><label>Your Weight (kg)</label><input id="c-cbw" type="number" placeholder="70"/></div><div class="field"><label>Exercise Type</label><select id="c-cbet"><option value="8">Running (8 km/h)</option><option value="5">Walking (5 km/h)</option><option value="7">Cycling (moderate)</option><option value="9">Swimming</option><option value="6">Gym workout / weights</option><option value="4">Yoga / stretching</option><option value="10">HIIT / intense cardio</option></select></div><div class="field"><label>Duration (minutes)</label><input id="c-cbd" type="number" placeholder="30" min="1"/></div>`,
-    fn:()=>{const w=+($('c-cbw').value),met=+($('c-cbet').value),min=+($('c-cbd').value);if(!w||!min)return null;const cal=Math.round(met*w*min/60);return{v:cal,u:`kcal burned in ${min} minutes`,col:'#38BDF8',i:`You burn approximately <strong>${cal} kcal</strong> in ${min} minutes. Weekly total (5 sessions): ~${cal*5} kcal burned.`,note:'MET-based estimate. Actual calorie burn varies with fitness level, intensity, and individual metabolism.'};}},
-  proteinuser:{sub:'How Much Protein Do You Need?',
-    html:`<div class="field"><label>Body Weight (kg)</label><input id="c-pru" type="number" placeholder="65"/></div><div class="field"><label>Your Goal</label><select id="c-prgu"><option value="0.8">General health (sedentary)</option><option value="1.2">Lightly active</option><option value="1.6">Regular gym / fitness</option><option value="2.0">Build muscle / sports</option></select></div>`,
-    fn:()=>{const w=+($('c-pru').value),g=+($('c-prgu').value);if(!w)return null;const p=Math.round(w*g);return{v:p+' g',u:'protein per day',col:'#2DD4BF',i:`Daily protein goal: <strong>${p}g</strong> (${g}g/kg). Try to spread this across 4–5 meals for best absorption (20–40g per meal).`,note:'Good sources: chicken (31g/100g), eggs (13g each), lentils (18g/100g cooked), Greek yoghurt (10g/100g).'};}},
-  hydrate:{sub:'Daily Hydration Calculator',
-    html:`<div class="field"><label>Body Weight (kg)</label><input id="c-hyu" type="number" placeholder="65"/></div><div class="field"><label>Activity</label><select id="c-hyact"><option value="30">Sedentary</option><option value="35">Lightly active</option><option value="40">Moderately active</option><option value="45">Very active / athlete</option></select></div>`,
-    fn:()=>{const w=+($('c-hyu').value),mlpkg=+($('c-hyact').value);if(!w)return null;const daily=w*mlpkg;return{v:(daily/1000).toFixed(1)+' L',u:`per day | ${Math.ceil(daily/250)} glasses of water`,col:'#38BDF8',i:`Daily hydration goal: <strong>${(daily/1000).toFixed(1)} litres</strong>. Increase by 500mL–1L per hour of exercise.`,note:'Signs of good hydration: pale yellow urine, no dizziness, regular urination.'};}},
-  sleep:{sub:'How Much Sleep Do You Need?',
-    html:`<div class="field"><label>Your Age (years)</label><input id="c-slu" type="number" placeholder="30" min="0"/></div>`,
-    fn:()=>{const age=+($('c-slu').value);if(!age&&age!==0)return null;let rec,interp;if(age<1){rec='14–17 hours';interp='Newborns need most sleep including naps.';}else if(age<3){rec='11–14 hours';interp='Toddlers need 11–14 hours including naps.';}else if(age<6){rec='10–13 hours';interp='Pre-school children need 10–13 hours.';}else if(age<13){rec='9–11 hours';interp='School-age children need 9–11 hours.';}else if(age<18){rec='8–10 hours';interp='Teenagers need 8–10 hours. Sleep deprivation is very common.';}else if(age<65){rec='7–9 hours';interp='Adults need 7–9 hours. Less than 7 hours is associated with serious health risks.';}else{rec='7–8 hours';interp='Older adults need 7–8 hours. Good sleep hygiene is especially important.';}return{v:rec,u:'per night (NSF recommendation)',col:'#38BDF8',i:`Age ${age}: <strong>${rec}</strong> recommended. ${interp}`,note:'Chronic sleep deprivation is linked to obesity, cardiovascular disease, and cognitive decline.'};}},
-  idealwt:{sub:'Ideal Weight for Your Height',
-    html:`<div class="field"><label>Height (cm)</label><input id="c-iwh" type="number" placeholder="165"/></div><div class="field"><label>Sex</label><select id="c-iws"><option value="male">Male</option><option value="female">Female</option></select></div>`,
-    fn:()=>{const h=+($('c-iwh').value),s=$('c-iws').value;if(!h)return null;const inches=(h/2.54)-60,ibw=(s==='male'?50:45.5)+2.3*inches;if(ibw<20)return null;return{v:ibw.toFixed(1)+' kg',u:`Ideal weight (Devine) | Healthy range: ${(ibw*.9).toFixed(1)}–${(ibw*1.1).toFixed(1)} kg`,col:'#2DD4BF',i:`Your ideal weight is <strong>${ibw.toFixed(1)} kg</strong>. A healthy range is ${(ibw*.9).toFixed(1)}–${(ibw*1.1).toFixed(1)} kg.`,note:'Ideal weight is a guide, not a strict target. Focus on overall health and body composition.'};}},
-  bodyfat:{sub:'Estimate Your Body Fat Percentage',
-    html:`<div class="field"><label>Sex</label><select id="c-bfs"><option value="male">Male</option><option value="female">Female</option></select></div><div class="field"><label>Height (cm)</label><input id="c-bfh" type="number" placeholder="170"/></div><div class="field"><label>Waist Circumference (cm)</label><input id="c-bfw" type="number" placeholder="85"/></div><div class="field"><label>Neck Circumference (cm)</label><input id="c-bfn" type="number" placeholder="38"/></div><div class="field"><label>Hip (cm) — women only</label><input id="c-bfhip" type="number" placeholder="95"/></div>`,
-    fn:()=>{const sex=$('c-bfs').value,h=+($('c-bfh').value),w=+($('c-bfw').value),n=+($('c-bfn').value),hip=+($('c-bfhip').value)||0;if(!h||!w||!n)return null;let bf=sex==='male'?495/(1.0324-.19077*Math.log10(w-n)+.15456*Math.log10(h))-450:(!hip?null:495/(1.29579-.35004*Math.log10(w+hip-n)+.22100*Math.log10(h))-450);if(bf===null)return null;const cat=sex==='male'?bf<6?'Essential Fat':bf<14?'Athletic':bf<18?'Fitness':bf<25?'Acceptable':'Obese':bf<14?'Essential Fat':bf<21?'Athletic':bf<25?'Fitness':bf<32?'Acceptable':'Obese';const col=(sex==='male'?bf<25:bf<32)?'#2DD4BF':'#F59E0B';return{v:bf.toFixed(1)+'%',u:`Body Fat — ${cat} range`,col,i:`Body fat: <strong>${bf.toFixed(1)}% — ${cat}</strong> for ${sex}s. ${(sex==='male'?bf>25:bf>32)?'Reducing body fat can significantly improve cardiovascular health.':'Body fat within healthy range.'}`,note:'US Navy method. Male healthy: 6–24%. Female healthy: 14–31%.'};}}
-};
-
-/* ════════════════════════════════════════
-   TOOLS RENDER
-════════════════════════════════════════ */
-let curType='pro',curSub=null;
-function $(id){return document.getElementById(id);}
-
-function setType(t){curType=t;curSub=null;$('btn-pro').classList.toggle('active',t==='pro');$('btn-user').classList.toggle('active',t==='user');renderTools();}
-
-function renderTools(){
-  const cats=Object.keys(TOOLS[curType]);
-  // Subcats
-  $('subcat-bar').innerHTML=`<button class="tsc-btn${!curSub?' active':''}" onclick="setSub(null)">All</button>`+cats.map(c=>`<button class="tsc-btn${curSub===c?' active':''}" onclick="setSub('${c.replace(/'/g,"\\'")}')">${c}</button>`).join('');
-  // Tools
-  const data=TOOLS[curType];
-  const show=curSub?{[curSub]:data[curSub]}:data;
-  let html='';
-  for(const[cat,tools]of Object.entries(show)){
-    html+=`<div class="tools-cat-section"><div class="tools-cat-title">${cat}<span class="tc-count">${tools.length}</span></div><div class="tools-grid">`;
-    html+=tools.map(t=>`<div class="tool-card" onclick="openTool('${t.id}','${t.name.replace(/['"]/g,'')}','${t.icon}',${t.calc},${!!t.premium})">${t.premium?`<div class="premium-badge">⭐ Premium</div>`:''}
-      <div class="tc-icon">${t.icon}</div>
-      <div class="tc-name">${t.name}</div>
-      <div class="tc-desc">${t.desc}</div>
-      <button class="tc-action">${t.premium?'Request Access ★':'Launch Tool →'}</button>
-    </div>`).join('');
-    html+=`</div></div>`;
-  }
-  $('tools-list').innerHTML=html;
-}
-
-function setSub(s){curSub=s;renderTools();}
-
-function openTool(id,name,icon,hasCalc,isPremium){
-  const c=CALCS[id];
-  $('m-title').textContent=icon+' '+name;
-  if(isPremium){
-    $('m-sub').textContent='Premium Feature';
-    $('m-body').innerHTML=`<div style="grid-column:span 2;text-align:center;padding:36px 20px">
-      <div style="font-size:44px;margin-bottom:16px">⭐</div>
-      <h3 style="font-family:var(--fd);font-size:20px;font-weight:800;margin-bottom:10px">Premium Access Required</h3>
-      <p style="font-size:14px;color:var(--muted);line-height:1.65;max-width:400px;margin:0 auto 22px">This advanced clinical tool is part of the Clixa Health Professional Suite. Contact us to request early access or discuss institutional licensing.</p>
-      <button class="btn btn-grad" onclick="closeToolModal();goPage('consult')">Request Early Access →</button>
-    </div>`;
-  } else if(c){
-    $('m-sub').textContent=c.sub;
-    $('m-body').innerHTML=`<div class="modal-inputs"><h4>Inputs</h4>${c.html}<button class="calc-submit" onclick="runCalc('${id}')">Calculate →</button></div>
-      <div class="modal-results"><h4>Results</h4><div class="result-box" id="res-box"><div style="color:var(--muted);font-size:13px;text-align:center;padding:18px 0">Enter values and click Calculate</div></div></div>`;
-  } else {
-    $('m-sub').textContent='Clinical tool — coming soon';
-    $('m-body').innerHTML=`<div style="grid-column:span 2;text-align:center;padding:36px 20px">
-      <div style="font-size:44px;margin-bottom:14px">${icon}</div>
-      <h3 style="font-family:var(--fd);font-size:18px;font-weight:800;margin-bottom:10px">${name}</h3>
-      <p style="font-size:14px;color:var(--muted);line-height:1.65">This tool is under development and will be available soon.</p>
-      <button class="btn btn-outline" style="margin-top:18px" onclick="closeToolModal();goPage('consult')">Request Early Access →</button>
-    </div>`;
-  }
-  $('tool-overlay').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-
-function runCalc(id){
-  const c=CALCS[id];if(!c)return;
-  const res=c.fn();
-  const box=$('res-box');
-  if(!res){box.innerHTML='<div style="color:#F59E0B;font-size:13px;text-align:center;padding:16px">⚠️ Please fill in all required fields</div>';return;}
-  box.innerHTML=`<div class="r-val" style="background:linear-gradient(135deg,${res.col},var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${res.v}</div>
-    <div class="r-unit">${res.u}</div>
-    <div class="r-interp"><strong>Interpretation:</strong><br>${res.i}</div>
-    <div class="r-note">ℹ️ ${res.note}</div>`;
-}
-
-function closeToolModal(){$('tool-overlay').classList.remove('open');document.body.style.overflow='';}
-function closeModal(e){if(e.target.id==='tool-overlay')closeToolModal();}
-function copyResult(){const b=$('res-box');if(b)navigator.clipboard.writeText(b.innerText).catch(()=>{});}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeToolModal();});
-
-/* ════════════════════════════════════════
-   PORTFOLIO DATA & RENDER
-════════════════════════════════════════ */
-const PF_DATA=[
-  {id:'ortho',name:'Dream Ortho Spine',desc:'Orthopedics and spine specialty clinic — full digital transformation from brand to patient platform.',
-    color:'#0EA5E9',bg:'linear-gradient(135deg,#0a1628,#0d3060)',
-    tags:[{l:'Website',c:'#38BDF8'},{l:'Branding',c:'#14B8A6'},{l:'Patient Marketing',c:'#A78BFA'},{l:'Mobile App',c:'#FB923C'}],
-    work:[{icon:'🖥️',bg:'linear-gradient(135deg,#0a1628,#0d3060)',type:'Website & Platform',title:'Full Digital Presence'},{icon:'🎨',bg:'linear-gradient(135deg,#0d2240,#0a1628)',type:'Brand Identity',title:'Logo & Visual System'},{icon:'📱',bg:'linear-gradient(135deg,#0a2030,#062040)',type:'Patient App',title:'Mobile Booking App'}],
-    impacts:[{v:'320%',l:'Patient Inquiries'},{v:'4.9★',l:'Google Rating'},{v:'2.4×',l:'Traffic Growth'},{v:'92%',l:'Booking Rate'}]},
-  {id:'etcare',name:'EtCare MCH',desc:'Maternal and child health digital platform for Ethiopia — telehealth, MCH app, and education.',
-    color:'#A78BFA',bg:'linear-gradient(135deg,#1a0a2e,#2d1060)',
-    tags:[{l:'Telehealth',c:'#A78BFA'},{l:'MCH Platform',c:'#14B8A6'},{l:'Mobile App',c:'#38BDF8'},{l:'Digital Strategy',c:'#FB923C'}],
-    work:[{icon:'🌸',bg:'linear-gradient(135deg,#1a0a2e,#2d1060)',type:'Telehealth Platform',title:'EtCare MCH System'},{icon:'🎨',bg:'linear-gradient(135deg,#200a38,#1a0a2e)',type:'Brand Identity',title:'MCH Visual Identity'},{icon:'📚',bg:'linear-gradient(135deg,#0a1628,#1a0a2e)',type:'Patient Education',title:'Health Content Hub'}],
-    impacts:[{v:'8,400+',l:'MCH Patients'},{v:'3×',l:'Antenatal Attendance'},{v:'96%',l:'Satisfaction'},{v:'5',l:'Regions Covered'}]},
-  {id:'bmy',name:'BMY Diagnostics',desc:'Diagnostic lab digital transformation — online results, booking system, and full rebranding.',
-    color:'#FB923C',bg:'linear-gradient(135deg,#2e1a0a,#4a2a08)',
-    tags:[{l:'Lab Platform',c:'#FB923C'},{l:'Digital Results',c:'#38BDF8'},{l:'Branding',c:'#14B8A6'},{l:'Patient Portal',c:'#A78BFA'}],
-    work:[{icon:'🔬',bg:'linear-gradient(135deg,#2e1a0a,#4a2a08)',type:'Lab Platform',title:'Digital Results System'},{icon:'🎨',bg:'linear-gradient(135deg,#3a2010,#2e1a0a)',type:'Full Rebrand',title:'Brand Design System'},{icon:'📅',bg:'linear-gradient(135deg,#1a1000,#2e1a0a)',type:'Patient Portal',title:'Online Booking System'}],
-    impacts:[{v:'60%',l:'Waiting Time Reduction'},{v:'1,200+',l:'Daily Digital Reports'},{v:'4.8★',l:'Patient Rating'},{v:'40%',l:'Revenue Growth Y1'}]},
-  {id:'grandb',name:'Grand Bishoftu Hospital',desc:'Private hospital digital strategy, website, community health marketing across the region.',
-    color:'#14B8A6',bg:'linear-gradient(135deg,#0a2018,#0d3020)',
-    tags:[{l:'Hospital Strategy',c:'#14B8A6'},{l:'Web Platform',c:'#38BDF8'},{l:'Community Marketing',c:'#4ADE80'},{l:'Signage',c:'#FB923C'}],
-    work:[{icon:'🏥',bg:'linear-gradient(135deg,#0a2018,#0d3020)',type:'Hospital Website',title:'Full Digital Platform'},{icon:'📊',bg:'linear-gradient(135deg,#0d2818,#0a2018)',type:'Marketing Campaigns',title:'Community Health Campaigns'},{icon:'🎨',bg:'linear-gradient(135deg,#0a1818,#0a2018)',type:'Brand & Signage',title:'Hospital Visual Identity'}],
-    impacts:[{v:'180%',l:'Patient Volume'},{v:'2.4M',l:'Social Media Reach'},{v:'95%',l:'Online Booking'},{v:'#1',l:'Google Bishoftu'}]},
-  {id:'addish',name:'Addis Hiwot Hospital',desc:'Private hospital in Addis Ababa — full digital rebrand, website, patient acquisition, and social growth.',
-    color:'#8B5CF6',bg:'linear-gradient(135deg,#1a0a28,#2a0a3a)',
-    tags:[{l:'Hospital Digital',c:'#8B5CF6'},{l:'Patient Acquisition',c:'#38BDF8'},{l:'Social Media',c:'#14B8A6'},{l:'Rebranding',c:'#F472B6'}],
-    work:[{icon:'🏥',bg:'linear-gradient(135deg,#1a0a28,#2a0a3a)',type:'Hospital Website',title:'Addis Hiwot Platform'},{icon:'🎨',bg:'linear-gradient(135deg,#22103a,#1a0a28)',type:'Complete Rebrand',title:'Full Brand Overhaul'},{icon:'📱',bg:'linear-gradient(135deg,#100a28,#1a0a28)',type:'Social Media',title:'Digital Marketing Strategy'}],
-    impacts:[{v:'220%',l:'New Patient Growth'},{v:'18K+',l:'Social Followers'},{v:'4.7★',l:'Google Rating'},{v:'Top 3',l:'Addis Ranking'}]}
-];
-
-let pfFilter_cur='all';
-function pfFilter(id,btn){
-  pfFilter_cur=id;
-  document.querySelectorAll('.pf-filter').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderPortfolio();
-}
-
-function renderPortfolio(){
-  const list=pfFilter_cur==='all'?PF_DATA:PF_DATA.filter(c=>c.id===pfFilter_cur);
-  $('pf-content').innerHTML=list.map(c=>`
-    <div class="pf-client-block">
-      <div class="pf-client-header">
-        <div class="pf-client-logo" style="background:${c.bg};border-color:${c.color}40">
-          <span style="font-size:22px">🏥</span>
-        </div>
-        <div>
-          <div class="pf-client-name">${c.name}</div>
-          <div class="pf-client-desc">${c.desc}</div>
-          <div class="pf-tags">${c.tags.map(t=>`<span class="pf-tag" style="color:${t.c};background:${t.c}18;border:1px solid ${t.c}30">${t.l}</span>`).join('')}</div>
-        </div>
-      </div>
-      <div class="pf-work-grid">${c.work.map(w=>`
-        <div class="pf-work-card">
-          <div class="pf-work-visual" style="background:${w.bg}"><span style="position:relative;z-index:1">${w.icon}</span></div>
-          <div class="pf-work-body"><div class="pf-work-type" style="color:${c.color}">${w.type}</div><div class="pf-work-title">${w.title}</div></div>
-        </div>`).join('')}</div>
-      <div class="pf-impacts">${c.impacts.map(i=>`<div class="pf-impact"><div class="pfi-val">${i.v}</div><div class="pfi-lbl">${i.l}</div></div>`).join('')}</div>
-    </div>`).join('');
-}
-</script>
+  <div class="footer-bottom"><p>&copy; 2025 Clixa Health. All rights reserved.</p><p style="font-family:var(--fd);font-size:11px;color:var(--dim);letter-spacing:1px">FOUNDED BY DOCTORS &middot; BUILT BY TECHNOLOGISTS</p></div>
+</footer>
+<script src="js/main.js"></script>
 </body>
 </html>
