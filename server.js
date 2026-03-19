@@ -12,7 +12,7 @@ const DB_FILE = path.join(DATA_DIR, 'db.json');
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '..')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Ensure data dir and DB file
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
