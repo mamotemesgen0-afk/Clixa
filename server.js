@@ -15,9 +15,15 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Ensure data dir and DB file
-if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-
-function readDB() {
+try {
+    if (!fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+} catch (error) {
+    // If Vercel blocks it, it will "catch" the error here 
+    // and print a message instead of crashing.
+    console.log("Note: Could not create data folder (normal on Vercel)");
+}function readDB() {
   try {
     if (fs.existsSync(DB_FILE)) return JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
   } catch (e) {}
